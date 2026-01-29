@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hi, R.D. 😁 HUAHAUUSHSUAHUHA</title>
+<title>Hi, Ruswel 😁</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -18,7 +18,6 @@
   }
 
   .card {
-    position: relative; /* 🔥 FIX */
     text-align: center;
     max-width: 420px;
     padding: 30px;
@@ -26,8 +25,7 @@
   }
 
   h1 { font-size: 26px; }
-  h2 { font-size: 20px; }
-  p { color: #555; font-size: 16px; }
+  p { color: #555; }
 
   img {
     width: 220px;
@@ -37,11 +35,11 @@
 
   button {
     padding: 12px 30px;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 999px;
     border: none;
     cursor: pointer;
-    margin: 8px;
+    margin: 10px;
     transition: all 0.3s ease;
   }
 
@@ -54,19 +52,14 @@
     background: #eee;
     color: #333;
     position: absolute;
-    right: 20px;
-    top: 200px;
   }
 
-  .choice-btn {
-    background: #f3f3f3;
-    font-size: 14px;
-  }
-
-  .msg-btn {
-    background: #4caf50;
-    color: white;
-    margin-top: 12px;
+  iframe {
+    width: 100%;
+    height: 250px;
+    border-radius: 12px;
+    border: none;
+    margin-top: 15px;
   }
 
   .confetti {
@@ -90,26 +83,39 @@
 <div class="card" id="card">
   <h1 id="question">Hi, Ruswel 😁</h1>
   <p id="subtext">Chill lang ha… may pakiana ko gad hehe</p>
-  <img id="meme" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2Z1bWN6ZXA3a3U3d2J0a2F1czhxZ21yZXh2eHh5ZDB6dDFwY3dzbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oEjI6SIIHBdRxXI40/giphy.gif">
+  <img id="meme" src="https://i.imgur.com/z9F5Z6B.jpeg">
 
   <button id="yes">Yes 😌</button>
   <button id="no">No 🙄</button>
 </div>
 
+<!-- 🎵 Background Music -->
 <audio id="bgMusic" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b1fdbf38.mp3" type="audio/mpeg">
 </audio>
 
+<!-- 🎊 Confetti Sound -->
 <audio id="confettiSound">
   <source src="https://www.soundjay.com/human/applause-8.mp3" type="audio/mpeg">
 </audio>
 
 <script>
   const steps = [
-    { q: "Pwede igkidnap ta ikaw this Feb 14? 👀", s: "Lowkey serious, highkey kabado 😭", img: "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" },
-    { q: "Weh? Fr fr? 😳", s: "Wala nay bawian ha", img: "https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" },
-    { q: "Sure sure?? 🤨", s: "Last warning charot", img: "https://media.giphy.com/media/26xBs99iqmmSLYGqY/giphy.gif" },
-    { q: "Final answer na ito 😌", s: "Locked in na pls", img: "https://media.giphy.com/media/xUOxf9nI8P7oGJpZtu/giphy.gif" }
+    {
+      q: "Pwede kita i-date? 👀",
+      s: "Low pressure lang, chill lang, no thoughts head empty 😌",
+      img: "https://i.imgur.com/j0dJt3y.jpeg"
+    },
+    {
+      q: "Sure ka na ba diyan? 😳",
+      s: "Walang bawian ha… screenshot ko na to char 😭",
+      img: "https://i.imgur.com/0M9Jf9p.jpeg"
+    },
+    {
+      q: "Final answer na talaga? 🤨",
+      s: "Pag pinindot mo pa yan, destiny na natin to",
+      img: "https://i.imgur.com/JJp9YyS.jpeg"
+    }
   ];
 
   let index = 0;
@@ -125,22 +131,16 @@
   const bgMusic = document.getElementById("bgMusic");
   const confettiSound = document.getElementById("confettiSound");
 
-  function saveChoice(choice) {
-    localStorage.setItem("dateChoice", choice);
+  // 🔊 Start music on FIRST click anywhere
+  function startMusicOnce() {
+    bgMusic.volume = 0.4;
+    bgMusic.play().catch(() => {});
+    document.removeEventListener("click", startMusicOnce);
   }
+  document.addEventListener("click", startMusicOnce);
 
-  function messageMe() {
-    const choice = localStorage.getItem("dateChoice") || "di pa sure 😅";
-    const text = encodeURIComponent(`Pinili ko na 👉 ${choice}`);
-    window.open(`https://m.me/mark.ian.villflores.2025?text=${text}`, "_blank");
-  }
-
-  yesBtn.onclick = () => {
-    if (bgMusic.paused) {
-      bgMusic.volume = 0.4;
-      bgMusic.play();
-    }
-
+  yesBtn.addEventListener("click", () => {
+    index++;
     yesScale += 0.25;
     yesBtn.style.transform = `scale(${yesScale})`;
 
@@ -148,31 +148,35 @@
       question.textContent = steps[index].q;
       subtext.textContent = steps[index].s;
       meme.src = steps[index].img;
-      index++;
     } else {
       card.innerHTML = `
-        <h1>AY WOW 😭💖 CONFIRMED NA</h1>
-        <p>Where to? 👀</p>
+        <h1>AY WOW 😭💖</h1>
+        <p>Official na to ha, wala nang atrasan.</p>
+        <p><strong>Ruswel</strong>, pick a spot below 👇</p>
 
-        <button class="choice-btn" onclick="saveChoice('☕ Coffee'); window.open('https://www.google.com/maps/search/coffee+Tacloban','_blank')">☕ Coffee</button>
-        <button class="choice-btn" onclick="saveChoice('🌳 Park'); window.open('https://www.google.com/maps/search/parks+Tacloban','_blank')">🌳 Park</button>
-        <button class="choice-btn" onclick="saveChoice('😌 Ikaw bahala'); window.open('https://www.google.com/maps?q=Tacloban','_blank')">😌 Ikaw bahala</button>
+        <iframe src="https://www.google.com/maps?q=Tacloban%20City&output=embed"></iframe>
+        <iframe src="https://www.google.com/maps?q=Madison%20Park%20Tacloban&output=embed"></iframe>
+        <iframe src="https://www.google.com/maps?q=Coffee%20Culture%20Tacloban&output=embed"></iframe>
 
-        <button class="msg-btn" onclick="messageMe()">💌 Message me</button>
+        <br><br>
+        <a href="https://m.me/mark.ian.villflores.2025" target="_blank">
+          <button style="background:#1877f2;color:white;">
+            Message me when you choose 💬
+          </button>
+        </a>
 
-        <iframe 
-          src="https://www.google.com/maps?q=Tacloban+City+Leyte&output=embed"
-          width="100%" height="300" style="border:0; border-radius:20px; margin-top:15px;">
-        </iframe>
+        <p>Sun & Moon vibes activated 🌙✨</p>
       `;
+
+      noBtn.style.display = "none";
       startConfetti();
       confettiSound.play();
     }
-  };
+  });
 
-  function moveNo() {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+  function moveAndShrinkNo() {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
@@ -181,17 +185,17 @@
     noBtn.style.transform = `scale(${noScale})`;
   }
 
-  noBtn.onmouseover = moveNo;
-  noBtn.onclick = moveNo;
+  noBtn.addEventListener("mouseover", moveAndShrinkNo);
+  noBtn.addEventListener("click", moveAndShrinkNo);
 
   function startConfetti() {
     for (let i = 0; i < 120; i++) {
-      const c = document.createElement("div");
-      c.className = "confetti";
-      c.style.left = Math.random() * window.innerWidth + "px";
-      c.style.background = `hsl(${Math.random() * 360},100%,50%)`;
-      c.style.animationDuration = Math.random() * 2 + 2 + "s";
-      document.body.appendChild(c);
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+      document.body.appendChild(confetti);
     }
   }
 </script>
