@@ -59,12 +59,13 @@ button:hover { transform: scale(1.05); }
   position:absolute;
 }
 
-/* 🐝 BEES */
+/* 🐝 BEES — ALWAYS FLYING */
 .bee {
   position: absolute;
   font-size: 28px;
   animation: fly 8s linear infinite;
   pointer-events: none;
+  z-index: 1;
 }
 
 @keyframes fly {
@@ -79,6 +80,7 @@ button:hover { transform: scale(1.05); }
   font-size: 22px;
   animation: float 6s ease-in-out infinite;
   opacity: 0.6;
+  z-index: 1;
 }
 
 @keyframes float {
@@ -118,16 +120,17 @@ button:hover { transform: scale(1.05); }
 
 <body>
 
-<!-- cute stickers -->
+<!-- 🐝 BEES (GLOBAL) -->
+<div class="bee" style="top:15%; animation-delay:0s;">🐝</div>
+<div class="bee" style="top:40%; animation-delay:2s;">🐝</div>
+<div class="bee" style="top:65%; animation-delay:4s;">🐝</div>
+<div class="bee" style="top:30%; animation-delay:6s;">🐝</div>
+
+<!-- stickers -->
 <div class="sticker" style="top:8%;left:10%;">☁️</div>
 <div class="sticker" style="top:18%;right:12%;">✨</div>
 <div class="sticker" style="bottom:12%;left:15%;">💜</div>
 <div class="sticker" style="bottom:18%;right:10%;">🌼</div>
-
-<!-- bees -->
-<div class="bee" style="top:20%; animation-delay:0s;">🐝</div>
-<div class="bee" style="top:45%; animation-delay:2s;">🐝</div>
-<div class="bee" style="top:65%; animation-delay:4s;">🐝</div>
 
 <div class="card" id="card">
   <h1 id="question">Hi, Ruswel 😁</h1>
@@ -174,7 +177,6 @@ function showFinal() {
   document.body.classList.add("cute-bg");
   card.innerHTML = `
     <h1>She said YES 😭💜</h1>
-    <p><em>Lowkey happy, highkey kilig.</em></p>
 
     <p>So… where do you wanna go? 😌</p>
 
@@ -186,7 +188,9 @@ function showFinal() {
 
     <div id="choice"></div>
 
-    <p style="margin-top:18px;"><strong>It malate mabayad hit expenses, ems SAHSAHHSAHSAHS </strong></p>
+    <p style="margin-top:18px;">
+      <strong>It malate hiya mabayad expenses HAUHSUAHSAUHSUAHSUAHSUA</strong>
+    </p>
   `;
 
   startConfetti();
