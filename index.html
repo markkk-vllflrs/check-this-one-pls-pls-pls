@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hi, R.D. 😁 HUAHAUUSHSUAHUHA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  .card {
+    text-align: center;
+    max-width: 420px;
+    padding: 30px;
+    z-index: 2;
+  }
+
+  h1 { font-size: 26px; }
+  h2 { font-size: 20px; }
+  p { color: #555; font-size: 16px; }
+
+  img {
+    width: 220px;
+    border-radius: 12px;
+    margin: 15px 0;
+  }
+
+  button {
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    margin: 8px;
+    transition: all 0.3s ease;
+  }
+
+  #yes {
+    background: #ff5f8f;
+    color: white;
+  }
+
+  #no {
+    background: #eee;
+    color: #333;
+    position: absolute;
+  }
+
+  .choice-btn {
+    background: #f3f3f3;
+    font-size: 14px;
+  }
+
+  .msg-btn {
+    background: #4caf50;
+    color: white;
+    margin-top: 12px;
+  }
+
+  /* Confetti */
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(360deg);
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h1 id="question">Hi, Ruswel 😁</h1>
+  <p id="subtext">Chill lang ha… may pakiana ko gad hehe</p>
+  <img id="meme" src="https://i.imgur.com/6b7RjQy.jpeg">
+
+  <button id="yes">Yes 😌</button>
+  <button id="no">No 🙄</button>
+</div>
+
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b1fdbf38.mp3?filename=warm-night-11394.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🎊 Confetti Sound -->
+<audio id="confettiSound">
+  <source src="https://www.soundjay.com/human/applause-8.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const steps = [
+    {
+      q: "Pwede igkidnap ta ikaw this Feb 14? 👀",
+      s: "Pramis tuod ini, kalbuhi ngan kutliga ak if trippings la :)))",
+      img: "https://i.imgur.com/6b7RjQy.jpeg"
+    },
+    {
+      q: "Weh? Weh? Fr fr? 😳",
+      s: "Sana diri mo ak igditch kay papabuthon kot iyo balay. Charot HASHAHSAHSHAHSA.",
+      img: "https://i.imgur.com/0M9Jf9p.jpeg"
+    },
+    {
+      q: "Sure sure?? 🤨",
+      s: ".",
+      img: "https://i.imgur.com/z9F5Z6B.jpeg"
+    },
+    {
+      q: "Ah balet?? 🤨",
+      s: "Blink twice pag need rescue HAUHAHUAAUHHAHSUAA",
+      img: "https://i.imgur.com/j0dJt3y.jpeg"
+    },
+    {
+      q: "Final answer na ito ha 😌",
+      s: "Waray na karagbawi, will report u as bogus.",
+      img: "https://i.imgur.com/JJp9YyS.jpeg"
+    }
+  ];
+
+  let index = 0;
+  let yesScale = 1;
+  let noScale = 1;
+
+  const yesBtn = document.getElementById("yes");
+  const noBtn = document.getElementById("no");
+  const question = document.getElementById("question");
+  const subtext = document.getElementById("subtext");
+  const meme = document.getElementById("meme");
+  const card = document.getElementById("card");
+  const bgMusic = document.getElementById("bgMusic");
+  const confettiSound = document.getElementById("confettiSound");
+
+  function saveChoice(choice) {
+    localStorage.setItem("dateChoice", choice);
+  }
+
+  function messageMe() {
+    const choice = localStorage.getItem("dateChoice") || "di pa sure 😅";
+    const text = encodeURIComponent(
+      Ini naaaa 👉 ${choice}Confirmed na ha 🫶`
+    );
+
+    window.open(
+      `https://m.me/mark.ian.villflores.2025?text=${text}`,
+      "_blank"
+    );
+  }
+
+  yesBtn.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      bgMusic.volume = 0.4;
+      bgMusic.play();
+    }
+
+    index++;
+    yesScale += 0.25;
+    yesBtn.style.transform = `scale(${yesScale})`;
+
+    if (index < steps.length) {
+      question.textContent = steps[index].q;
+      subtext.textContent = steps[index].s;
+      meme.src = steps[index].img;
+    } else {
+      card.innerHTML = `
+        <h1>AY WOWOWOWOWOW HUASHAUHSUAHUA 😭💖</h1>
+        <p>Confirmed na baya, ready to checkout.</p>
+        <p><strong>Ruswel</strong>, sinasabi ko sau 😌</p>
+        <img src="https://i.imgur.com/3ZQ3ZzN.jpeg">
+
+        <h2>Saan tayo? 👀📍</h2>
+
+        <button class="choice-btn" onclick="saveChoice('☕ Coffee muna'); window.open('https://www.google.com/maps/search/coffee+shop+Tacloban','_blank')">
+          ☕ Coffee muna
+        </button>
+
+        <button class="choice-btn" onclick="saveChoice('🌳 Park date'); window.open('https://www.google.com/maps/search/parks+Tacloban','_blank')">
+          🌳 Park date
+        </button>
+
+        <button class="choice-btn" onclick="saveChoice('😌 Ikaw bahala'); window.open('https://www.google.com/maps/search/things+to+do+in+Tacloban','_blank')">
+          😌 Ikaw bahala
+        </button>
+
+        <button class="msg-btn" onclick="messageMe()">
+          💌 Message me when you choose
+        </button>
+
+        <div style="width:100%; height:300px; margin-top:15px; border-radius:20px; overflow:hidden;">
+          <iframe 
+            src="https://www.google.com/maps?q=Tacloban+City+Leyte&output=embed"
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <p style="font-size:13px; margin-top:10px;">
+          Bis ngain dida basta true HUSAHSUAUHAUSAU 😌
+        </p>
+      `;
+      noBtn.style.display = "none";
+      startConfetti();
+      confettiSound.play();
+    }
+  });
+
+  function moveAndShrinkNo() {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    noScale -= 0.05;
+    if (noScale < 0.3) noScale = 0.3;
+    noBtn.style.transform = `scale(${noScale})`;
+  }
+
+  noBtn.addEventListener("mouseover", moveAndShrinkNo);
+  noBtn.addEventListener("click", moveAndShrinkNo);
+
+  function startConfetti() {
+    for (let i = 0; i < 120; i++) {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+      document.body.appendChild(confetti);
+    }
+  }
+</script>
+
+</body>
+</html>
