@@ -26,6 +26,7 @@ body.cute-bg {
   text-align: center;
   max-width: 420px;
   padding: 30px;
+  z-index: 2;
 }
 
 h1 { font-size: 26px; }
@@ -50,92 +51,35 @@ button {
 #yes { background:#ff5f8f; color:white; }
 #no { background:#eee; position:absolute; }
 
-/* 🌸 GARDEN */
-.garden {
-  position: relative;
-  height: 260px;
-  margin-top: 20px;
-}
-
-/* 🌱 FLOWER */
-.flower {
-  position: absolute;
-  bottom: 0;
+/* 🌸 FLOWER AREA */
+.flower-area {
+  margin-top: 25px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: sway 5s ease-in-out infinite;
+  justify-content: center;
 }
 
-@keyframes sway {
-  0%,100% { transform: rotate(0deg); }
-  25% { transform: rotate(-3deg); }
-  75% { transform: rotate(3deg); }
-}
-
-/* STEM */
-.stem {
-  width: 6px;
-  background: #4CAF50;
-  animation: grow 1.8s ease forwards;
-}
-
-@keyframes grow {
-  from { height: 0; }
-  to { height: var(--h); }
-}
-
-/* BLOOM */
-.bloom {
-  position: relative;
-  width: 90px;
-  height: 90px;
-  margin-top: -10px;
-}
-
-.petal {
+/* 🐝 BEES */
+.bee {
   position: absolute;
   width: 30px;
-  height: 48px;
-  background: #9b5de5;
-  border-radius: 50% 50% 40% 40%;
-  top: 20px;
-  left: 30px;
+  height: 30px;
+  animation: fly 10s linear infinite;
 }
 
-.p1 { transform: rotate(0deg) translateY(-36px); }
-.p2 { transform: rotate(60deg) translateY(-36px); }
-.p3 { transform: rotate(120deg) translateY(-36px); }
-.p4 { transform: rotate(180deg) translateY(-36px); }
-.p5 { transform: rotate(240deg) translateY(-36px); }
-.p6 { transform: rotate(300deg) translateY(-36px); }
-
-.center {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  background: gold;
-  border-radius: 50%;
-  top: 34px;
-  left: 34px;
+.bee::before {
+  content: "🐝";
+  font-size: 26px;
 }
 
-/* SIZES */
-.main {
-  --h: 140px;
-  left: 50%;
-  transform: translateX(-50%);
+@keyframes fly {
+  0%   { transform: translate(-10vw, 10vh); }
+  25%  { transform: translate(30vw, -10vh); }
+  50%  { transform: translate(60vw, 20vh); }
+  75%  { transform: translate(30vw, 40vh); }
+  100% { transform: translate(-10vw, 10vh); }
 }
 
-.side {
-  --h: 90px;
-  transform: scale(0.75);
-}
-
-.left { left: 20%; }
-.right { right: 20%; }
-
-/* PLACES */
+/* 🌸 PLACE BUTTONS */
 .place-btn {
   background: white;
   border: 2px solid #ddd;
@@ -144,6 +88,7 @@ button {
 .place-btn.selected {
   background: #9b5de5;
   color: white;
+  border-color: #9b5de5;
 }
 </style>
 </head>
@@ -157,6 +102,11 @@ button {
   <button id="yes">Yes 😌</button>
   <button id="no">No 🙄</button>
 </div>
+
+<!-- 🐝 BEES -->
+<div class="bee" style="animation-delay:0s;"></div>
+<div class="bee" style="animation-delay:3s;"></div>
+<div class="bee" style="animation-delay:6s;"></div>
 
 <script>
 const steps = [
@@ -191,36 +141,23 @@ function showFinal() {
 
     <div id="choice"></div>
 
-    <div class="garden">
-      <div class="flower side left">
-        <div class="stem"></div>
-        <div class="bloom">
-          <div class="petal p1"></div><div class="petal p2"></div>
-          <div class="petal p3"></div><div class="petal p4"></div>
-          <div class="petal p5"></div><div class="petal p6"></div>
-          <div class="center"></div>
-        </div>
-      </div>
+    <div class="flower-area">
+      <!-- 🌸 SAFE SVG FLOWER (UPRIGHT FOREVER) -->
+      <svg width="160" height="240" viewBox="0 0 160 240">
+        <!-- stem -->
+        <rect x="76" y="80" width="8" height="120" fill="#4CAF50"/>
+        
+        <!-- petals -->
+        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5"/>
+        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5" transform="rotate(60 80 60)"/>
+        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5" transform="rotate(120 80 60)"/>
+        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5" transform="rotate(180 80 60)"/>
+        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5" transform="rotate(240 80 60)"/>
+        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5" transform="rotate(300 80 60)"/>
 
-      <div class="flower main">
-        <div class="stem"></div>
-        <div class="bloom">
-          <div class="petal p1"></div><div class="petal p2"></div>
-          <div class="petal p3"></div><div class="petal p4"></div>
-          <div class="petal p5"></div><div class="petal p6"></div>
-          <div class="center"></div>
-        </div>
-      </div>
-
-      <div class="flower side right">
-        <div class="stem"></div>
-        <div class="bloom">
-          <div class="petal p1"></div><div class="petal p2"></div>
-          <div class="petal p3"></div><div class="petal p4"></div>
-          <div class="petal p5"></div><div class="petal p6"></div>
-          <div class="center"></div>
-        </div>
-      </div>
+        <!-- center -->
+        <circle cx="80" cy="60" r="14" fill="gold"/>
+      </svg>
     </div>
   `;
 }
