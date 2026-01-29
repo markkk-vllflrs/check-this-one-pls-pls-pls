@@ -57,109 +57,97 @@ button:hover { transform: scale(1.05); }
   position:absolute;
 }
 
-/* 🌸 FLOWER AREA */
-.flower-area {
+/* 🌿 GARDEN */
+.garden {
   position: relative;
   height: 300px;
   margin-top: 20px;
 }
 
-.flower-wrapper {
+/* 🌸 FLOWERS */
+.flower {
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  transform-origin: bottom center;
-  animation: sway 5s ease-in-out infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: swayX 4s ease-in-out infinite;
 }
 
-@keyframes sway {
-  0% { transform: translateX(-50%) rotate(0deg); }
-  25% { transform: translateX(-50%) rotate(-4deg); }
-  50% { transform: translateX(-50%) rotate(0deg); }
-  75% { transform: translateX(-50%) rotate(4deg); }
-  100% { transform: translateX(-50%) rotate(0deg); }
+@keyframes swayX {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
 }
 
-/* 🌱 Stem growth */
 .stem {
   width: 6px;
-  height: 0;
   background: #4CAF50;
-  margin: 0 auto;
   animation: growStem 2s ease forwards;
 }
 
 @keyframes growStem {
-  to { height: 140px; }
+  from { height: 0; }
+  to { height: var(--stem-height); }
 }
 
-/* 🌼 Flower head */
-.flower {
+/* 🌼 BLOOM */
+.bloom {
   position: relative;
-  width: 120px;
-  height: 120px;
-  margin: 0 auto;
-  transform: scale(0);
-  animation: bloom 1s ease forwards;
-  animation-delay: 2s;
-}
-
-@keyframes bloom {
-  to { transform: scale(1); }
-}
-
-.flower {
+  width: var(--size);
+  height: var(--size);
   animation: breathe 4s ease-in-out infinite;
 }
 
 @keyframes breathe {
-  0% { transform: scale(1); }
+  0%,100% { transform: scale(1); }
   50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
 }
 
-/* 🌸 Petals */
 .petal {
   position: absolute;
-  width: 38px;
-  height: 58px;
-  background: #9b5de5;
-  border-radius: 50% 50% 40% 40%;
-  top: 30px;
-  left: 41px;
+  width: 40%;
+  height: 60%;
+  background: var(--color);
+  border-radius: 50%;
+  top: 20%;
+  left: 30%;
   opacity: 0;
-  transform-origin: center 50px;
-  animation: petalBloom 0.6s ease forwards;
+  animation: petalBloom 0.5s ease forwards;
 }
 
 @keyframes petalBloom {
   to { opacity: 1; }
 }
 
-.p1 { transform: rotate(0deg) translateY(-40px); animation-delay: 2.2s; }
-.p2 { transform: rotate(60deg) translateY(-40px); animation-delay: 2.4s; }
-.p3 { transform: rotate(120deg) translateY(-40px); animation-delay: 2.6s; }
-.p4 { transform: rotate(180deg) translateY(-40px); animation-delay: 2.8s; }
-.p5 { transform: rotate(240deg) translateY(-40px); animation-delay: 3s; }
-.p6 { transform: rotate(300deg) translateY(-40px); animation-delay: 3.2s; }
+.p1 { transform: rotate(0deg) translateY(-40%); animation-delay: 2.2s; }
+.p2 { transform: rotate(60deg) translateY(-40%); animation-delay: 2.4s; }
+.p3 { transform: rotate(120deg) translateY(-40%); animation-delay: 2.6s; }
+.p4 { transform: rotate(180deg) translateY(-40%); animation-delay: 2.8s; }
+.p5 { transform: rotate(240deg) translateY(-40%); animation-delay: 3s; }
+.p6 { transform: rotate(300deg) translateY(-40%); animation-delay: 3.2s; }
 
-/* 🌼 Center */
 .center {
   position: absolute;
-  width: 26px;
-  height: 26px;
+  width: 25%;
+  height: 25%;
   background: gold;
   border-radius: 50%;
-  top: 47px;
-  left: 47px;
+  top: 37%;
+  left: 37%;
   opacity: 0;
-  animation: fadeIn 0.5s ease forwards;
+  animation: petalBloom 0.5s ease forwards;
   animation-delay: 3.4s;
 }
 
-@keyframes fadeIn {
-  to { opacity: 1; }
+/* 🌱 GRASS */
+.grass {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 30px;
+  background: #6ccf70;
+  border-radius: 4px;
 }
 
 /* places */
@@ -229,18 +217,35 @@ function showFinal() {
 
     <div id="choice"></div>
 
-    <div class="flower-area">
-      <div class="flower-wrapper">
-        <div class="stem"></div>
-        <div class="flower">
-          <div class="petal p1"></div>
-          <div class="petal p2"></div>
-          <div class="petal p3"></div>
-          <div class="petal p4"></div>
-          <div class="petal p5"></div>
-          <div class="petal p6"></div>
+    <div class="garden">
+      <!-- LEFT FLOWER -->
+      <div class="flower" style="left:10%; --stem-height:90px; --size:70px; --color:#f28482;">
+        <div class="bloom">
+          <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
+          <div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
           <div class="center"></div>
         </div>
+        <div class="stem"></div>
+      </div>
+
+      <!-- CENTER MAIN FLOWER -->
+      <div class="flower" style="left:45%; --stem-height:160px; --size:110px; --color:#9b5de5;">
+        <div class="bloom">
+          <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
+          <div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
+          <div class="center"></div>
+        </div>
+        <div class="stem"></div>
+      </div>
+
+      <!-- RIGHT FLOWER -->
+      <div class="flower" style="left:75%; --stem-height:80px; --size:60px; --color:#f6bd60;">
+        <div class="bloom">
+          <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
+          <div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
+          <div class="center"></div>
+        </div>
+        <div class="stem"></div>
       </div>
     </div>
   `;
