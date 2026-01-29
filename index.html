@@ -26,7 +26,6 @@ body.cute-bg {
   text-align: center;
   max-width: 420px;
   padding: 30px;
-  z-index: 2;
 }
 
 h1 { font-size: 26px; }
@@ -48,130 +47,95 @@ button {
   transition: all 0.25s ease;
 }
 
-button:hover { transform: scale(1.05); }
-
 #yes { background:#ff5f8f; color:white; }
-#no {
-  background:#eee;
-  color:#333;
-  position:absolute;
-}
+#no { background:#eee; position:absolute; }
 
 /* 🌸 GARDEN */
 .garden {
   position: relative;
-  height: 280px;
+  height: 260px;
   margin-top: 20px;
 }
 
-/* 🌼 FLOWER BASE */
+/* 🌱 FLOWER */
 .flower {
   position: absolute;
   bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform-origin: bottom center;
   animation: sway 5s ease-in-out infinite;
 }
 
 @keyframes sway {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-4deg); }
-  50% { transform: rotate(0deg); }
-  75% { transform: rotate(4deg); }
-  100% { transform: rotate(0deg); }
+  0%,100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
 }
 
-/* 🌱 STEM */
+/* STEM */
 .stem {
   width: 6px;
-  height: 0;
   background: #4CAF50;
-  animation: growStem 2s ease forwards;
+  animation: grow 1.8s ease forwards;
 }
 
-@keyframes growStem {
-  to { height: var(--stem-height); }
+@keyframes grow {
+  from { height: 0; }
+  to { height: var(--h); }
 }
 
-/* 🌸 BLOOM */
+/* BLOOM */
 .bloom {
   position: relative;
-  width: 100px;
-  height: 100px;
-  animation: breathe 4s ease-in-out infinite;
-}
-
-@keyframes breathe {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  width: 90px;
+  height: 90px;
+  margin-top: -10px;
 }
 
 .petal {
   position: absolute;
-  width: 36px;
-  height: 56px;
+  width: 30px;
+  height: 48px;
   background: #9b5de5;
-  border-radius: 50% 50% 45% 45%;
-  top: 22px;
-  left: 32px;
-  transform-origin: center 45px;
-  opacity: 0;
-  animation: bloomPetal 0.6s ease forwards;
+  border-radius: 50% 50% 40% 40%;
+  top: 20px;
+  left: 30px;
 }
 
-@keyframes bloomPetal {
-  to { opacity: 1; }
-}
-
-.p1 { transform: rotate(0deg) translateY(-38px); animation-delay:.2s }
-.p2 { transform: rotate(60deg) translateY(-38px); animation-delay:.4s }
-.p3 { transform: rotate(120deg) translateY(-38px); animation-delay:.6s }
-.p4 { transform: rotate(180deg) translateY(-38px); animation-delay:.8s }
-.p5 { transform: rotate(240deg) translateY(-38px); animation-delay:1s }
-.p6 { transform: rotate(300deg) translateY(-38px); animation-delay:1.2s }
+.p1 { transform: rotate(0deg) translateY(-36px); }
+.p2 { transform: rotate(60deg) translateY(-36px); }
+.p3 { transform: rotate(120deg) translateY(-36px); }
+.p4 { transform: rotate(180deg) translateY(-36px); }
+.p5 { transform: rotate(240deg) translateY(-36px); }
+.p6 { transform: rotate(300deg) translateY(-36px); }
 
 .center {
   position: absolute;
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   background: gold;
   border-radius: 50%;
-  top: 37px;
-  left: 37px;
+  top: 34px;
+  left: 34px;
 }
 
-/* 🌿 SIZES */
+/* SIZES */
 .main {
-  --stem-height: 150px;
+  --h: 140px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .side {
-  --stem-height: 90px;
+  --h: 90px;
   transform: scale(0.75);
 }
 
 .left { left: 20%; }
 .right { right: 20%; }
 
-/* 🌾 GRASS */
-.grass {
-  position: absolute;
-  bottom: 0;
-  width: 6px;
-  height: 40px;
-  background: #6BCF9B;
-  border-radius: 10px;
-  animation: sway 3s ease-in-out infinite;
-}
-.grass.g1 { left: 35%; height: 45px; }
-.grass.g2 { left: 65%; height: 35px; }
-
-/* places */
+/* PLACES */
 .place-btn {
   background: white;
   border: 2px solid #ddd;
@@ -180,7 +144,6 @@ button:hover { transform: scale(1.05); }
 .place-btn.selected {
   background: #9b5de5;
   color: white;
-  border-color: #9b5de5;
 }
 </style>
 </head>
@@ -204,10 +167,6 @@ const steps = [
 
 let step = 0;
 let yesScale = 1;
-let noScale = 1;
-
-const yes = document.getElementById("yes");
-const no = document.getElementById("no");
 
 yes.onclick = () => {
   if (step < steps.length) {
@@ -217,9 +176,7 @@ yes.onclick = () => {
     step++;
     yesScale += 0.25;
     yes.style.transform = `scale(${yesScale})`;
-  } else {
-    showFinal();
-  }
+  } else showFinal();
 };
 
 function showFinal() {
@@ -264,9 +221,6 @@ function showFinal() {
           <div class="center"></div>
         </div>
       </div>
-
-      <div class="grass g1"></div>
-      <div class="grass g2"></div>
     </div>
   `;
 }
@@ -282,11 +236,9 @@ function pick(btn, place) {
   `;
 }
 
-no.onmouseover = no.onclick = () => {
+no.onmouseover = () => {
   no.style.left = Math.random()*80 + "vw";
   no.style.top = Math.random()*80 + "vh";
-  noScale = Math.max(0.3, noScale - 0.05);
-  no.style.transform = `scale(${noScale})`;
 };
 </script>
 
