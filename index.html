@@ -2,194 +2,185 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hi, R.D. 😁 HUAHAUUSHSUAHUHA</title>
+<title>Hi, R.D. 😁</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-    transition: background 1.5s ease;
-  }
+body {
+  margin: 0;
+  height: 100vh;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  transition: background 1.5s ease;
+}
 
-  body.cute-bg {
-    background: linear-gradient(135deg, #ffe6f0, #e6f0ff, #f3e8ff);
-  }
+body.cute-bg {
+  background: linear-gradient(135deg, #ffe6f0, #f3e8ff, #e6f0ff);
+}
 
-  .card {
-    text-align: center;
-    max-width: 420px;
-    padding: 30px;
-    position: relative;
-    z-index: 2;
-  }
+.card {
+  text-align: center;
+  max-width: 420px;
+  padding: 30px;
+  z-index: 2;
+}
 
-  h1 { font-size: 26px; }
-  p { color: #555; font-size: 16px; }
+h1 { font-size: 26px; }
+p { color: #555; }
 
-  img {
-    width: 220px;
-    border-radius: 12px;
-    margin: 15px 0;
-  }
+img {
+  width: 220px;
+  border-radius: 12px;
+  margin: 15px 0;
+}
 
-  button {
-    padding: 12px 30px;
-    font-size: 18px;
-    border-radius: 999px;
-    border: none;
-    cursor: pointer;
-    margin: 10px;
-    transition: all 0.3s ease;
-  }
+button {
+  padding: 12px 30px;
+  font-size: 18px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+  transition: all 0.3s ease;
+}
 
-  #yes { background:#ff5f8f; color:white; }
-  #no {
-    background:#eee;
-    color:#333;
-    position:absolute;
-  }
+#yes { background:#ff5f8f; color:white; }
+#no {
+  background:#eee;
+  color:#333;
+  position:absolute;
+}
 
-  /* 🌱 FLOWER AREA */
-  .flower-box {
-    position: relative;
-    height: 260px;
-    margin-top: 20px;
-  }
+/* 🌸 FLOWER SYSTEM */
+.flower-area {
+  position: relative;
+  height: 260px;
+  margin-top: 20px;
+}
 
-  /* STEM */
-  .stem {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 6px;
-    height: 0;
-    background: #4CAF50;
-    transform-origin: bottom center;
-    animation: growStem 2s ease forwards, sway 4s ease-in-out infinite;
-    animation-delay: 0s, 2s;
-  }
+.flower-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform-origin: bottom center;
+  animation: sway 5s ease-in-out infinite;
+}
 
-  @keyframes growStem {
-    to { height: 140px; }
-  }
+/* sway */
+@keyframes sway {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  25% { transform: translateX(-50%) rotate(-7deg); }
+  50% { transform: translateX(-50%) rotate(0deg); }
+  75% { transform: translateX(-50%) rotate(7deg); }
+  100% { transform: translateX(-50%) rotate(0deg); }
+}
 
-  @keyframes sway {
-    0% { transform: translateX(-50%) rotate(0deg); }
-    25% { transform: translateX(-50%) rotate(-6deg); }
-    50% { transform: translateX(-50%) rotate(0deg); }
-    75% { transform: translateX(-50%) rotate(6deg); }
-    100% { transform: translateX(-50%) rotate(0deg); }
-  }
+/* stem */
+.stem {
+  width: 6px;
+  height: 0;
+  background: #4CAF50;
+  margin: auto;
+  animation: growStem 2s ease forwards;
+}
 
-  /* 🌸 FLOWER */
-  .flower {
-    position: absolute;
-    bottom: 140px;
-    left: 50%;
-    width: 80px;
-    height: 80px;
-    transform: translateX(-50%) scale(0);
-    animation: bloom 2s ease forwards, breathe 4s ease-in-out infinite;
-    animation-delay: 3s, 5.5s;
-  }
+@keyframes growStem {
+  to { height: 140px; }
+}
 
-  @keyframes bloom {
-    to { transform: translateX(-50%) scale(1); }
-  }
+/* flower */
+.flower {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: auto;
+  margin-top: -10px;
+  transform: scale(0);
+  animation:
+    bloom 2s ease forwards,
+    breathe 4s ease-in-out infinite;
+  animation-delay: 2s, 4.5s;
+}
 
-  /* 🌬️ BREATHING EFFECT */
-  @keyframes breathe {
-    0%   { transform: translateX(-50%) scale(1); }
-    50%  { transform: translateX(-50%) scale(1.05); }
-    100% { transform: translateX(-50%) scale(1); }
-  }
+@keyframes bloom {
+  to { transform: scale(1); }
+}
 
-  .petal {
-    position: absolute;
-    width: 30px;
-    height: 50px;
-    background: pink;
-    border-radius: 50%;
-    top: 15px;
-    left: 25px;
-    transform-origin: bottom center;
-  }
+@keyframes breathe {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
 
-  .petal:nth-child(1) { transform: rotate(0deg) translateY(-20px); }
-  .petal:nth-child(2) { transform: rotate(60deg) translateY(-20px); }
-  .petal:nth-child(3) { transform: rotate(120deg) translateY(-20px); }
-  .petal:nth-child(4) { transform: rotate(180deg) translateY(-20px); }
-  .petal:nth-child(5) { transform: rotate(240deg) translateY(-20px); }
-  .petal:nth-child(6) { transform: rotate(300deg) translateY(-20px); }
+/* petals (VISIBLE I PROMISE 😭) */
+.petal {
+  position: absolute;
+  width: 36px;
+  height: 60px;
+  background: #ff9acb;
+  border-radius: 50% 50% 40% 40%;
+  top: 15px;
+  left: 27px;
+  transform-origin: bottom center;
+}
 
-  .center {
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    background: gold;
-    border-radius: 50%;
-    top: 29px;
-    left: 29px;
-  }
+.p1 { transform: rotate(0deg) translateY(-22px); }
+.p2 { transform: rotate(60deg) translateY(-22px); }
+.p3 { transform: rotate(120deg) translateY(-22px); }
+.p4 { transform: rotate(180deg) translateY(-22px); }
+.p5 { transform: rotate(240deg) translateY(-22px); }
+.p6 { transform: rotate(300deg) translateY(-22px); }
 
-  /* 💜 VIOLET TRANSITION */
-  .violet .petal {
-    animation: violetize 3s ease forwards;
-    animation-delay: 4.5s;
-  }
+/* center */
+.center {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: gold;
+  border-radius: 50%;
+  top: 34px;
+  left: 34px;
+}
 
-  @keyframes violetize {
-    to { background: #9b5de5; }
-  }
+/* violet transition */
+.violet .petal {
+  animation: violetize 3s ease forwards;
+  animation-delay: 4s;
+}
 
-  /* 💕 FLOATING HEARTS */
-  .heart {
-    position: absolute;
-    bottom: -20px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.7;
-  }
+@keyframes violetize {
+  to { background:#9b5de5; }
+}
 
-  @keyframes floatUp {
-    to { transform: translateY(-110vh); opacity: 0; }
-  }
+/* hearts */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  animation: floatUp 6s linear infinite;
+}
 
-  /* ✨ SPARKLES */
-  .sparkle {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.8;
-    animation: sparkle 2s infinite;
-  }
+@keyframes floatUp {
+  to { transform: translateY(-110vh); opacity: 0; }
+}
 
-  @keyframes sparkle {
-    50% { opacity: 0.3; transform: scale(1.5); }
-  }
+/* confetti */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall linear infinite;
+}
 
-  /* 🎊 CONFETTI */
-  .confetti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    top: -10px;
-    animation: fall linear infinite;
-  }
-
-  @keyframes fall {
-    to { transform: translateY(110vh) rotate(360deg); }
-  }
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); }
+}
 </style>
 </head>
 
@@ -207,108 +198,97 @@
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b1fdbf38.mp3">
 </audio>
 
-<audio id="confettiSound">
-  <source src="https://www.soundjay.com/human/applause-8.mp3">
-</audio>
-
 <script>
-  const steps=[
-    {q:"Pwede igkidnap ta ikaw this Feb 14? 👀",s:"Pramis tuod ini, kalbuhi ngan kutliga ak if trippings la :)))",img:"https://i.imgur.com/6b7RjQy.jpeg"},
-    {q:"Weh? Weh? Fr fr? 😳",s:"Sana diri mo ak igditch kay papabuthon kot iyo balay. Charot HASHAHSAHSHAHSA.",img:"https://i.imgur.com/0M9Jf9p.jpeg"},
-    {q:"Sure sure?? 🤨",s:".",img:"https://i.imgur.com/z9F5Z6B.jpeg"},
-    {q:"Ah balet?? 🤨",s:"Blink twice pag need rescue HAUHAHUAAUHHAHSUAA",img:"https://i.imgur.com/j0dJf3y.jpeg"},
-    {q:"Final answer na ito ha 😌",s:"Waray na karagbawi, will report u as bogus.",img:"https://i.imgur.com/JJp9YyS.jpeg"}
-  ];
+const steps=[
+ {q:"Pwede igkidnap ta ikaw this Feb 14? 👀",s:"Pramis tuod ini, kalbuhi ngan kutliga ak if trippings la :)))",img:"https://i.imgur.com/6b7RjQy.jpeg"},
+ {q:"Weh? Weh? Fr fr? 😳",s:"Sana diri mo ak igditch kay papabuthon kot iyo balay. Charot.",img:"https://i.imgur.com/0M9Jf9p.jpeg"},
+ {q:"Sure sure?? 🤨",s:".",img:"https://i.imgur.com/z9F5Z6B.jpeg"},
+ {q:"Final answer na ito ha 😌",s:"Waray na karagbawi.",img:"https://i.imgur.com/JJp9YyS.jpeg"}
+];
 
-  let index=0,yesScale=1,noScale=1;
-  const yesBtn=document.getElementById("yes");
-  const noBtn=document.getElementById("no");
-  const bgMusic=document.getElementById("bgMusic");
-  const confettiSound=document.getElementById("confettiSound");
+let i=0,ys=1,ns=1;
+const yes=document.getElementById("yes");
+const no=document.getElementById("no");
 
-  document.addEventListener("click",()=>{bgMusic.volume=0.4;bgMusic.play().catch(()=>{});},{once:true});
+document.addEventListener("click",()=>{
+  bgMusic.volume=0.4;
+  bgMusic.play().catch(()=>{});
+},{once:true});
 
-  yesBtn.onclick=()=>{
-    index++; yesScale+=0.25;
-    yesBtn.style.transform=`scale(${yesScale})`;
-    if(index<steps.length){
-      question.textContent=steps[index].q;
-      subtext.textContent=steps[index].s;
-      meme.src=steps[index].img;
-    } else {
-      document.body.classList.add("cute-bg");
-      card.innerHTML=`
-        <h1>AY WOWOWOWOW HUASHAUHSUAHUA 😭💖</h1>
-        <p>Confirmed na baya, ready to checkout.</p>
-        <p><strong>Ruswel</strong>, thank you ha 🥹</p>
+yes.onclick=()=>{
+  i++; ys+=0.25;
+  yes.style.transform=`scale(${ys})`;
+  if(i<steps.length){
+    question.textContent=steps[i].q;
+    subtext.textContent=steps[i].s;
+    meme.src=steps[i].img;
+  } else {
+    document.body.classList.add("cute-bg");
+    card.innerHTML=`
+      <h1>She said YES 😭💜</h1>
+      <p>Soft launch lang…</p>
 
-        <div class="flower-box">
+      <div class="flower-area">
+        <div class="flower-wrapper">
           <div class="stem"></div>
           <div class="flower violet">
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            <div class="petal p1"></div>
+            <div class="petal p2"></div>
+            <div class="petal p3"></div>
+            <div class="petal p4"></div>
+            <div class="petal p5"></div>
+            <div class="petal p6"></div>
             <div class="center"></div>
           </div>
         </div>
+      </div>
 
-        <button onclick="saveShot()" style="background:#8b5cf6;color:white;">
-          Save this moment 📸
-        </button>
-
-        <a href="https://m.me/mark.ian.villflores.2025" target="_blank">
-          <button style="background:#1877f2;color:white;">Message me 💬</button>
-        </a>
-      `;
-      confettiSound.play();
-      hearts(); sparkles(); confetti();
-    }
-  };
-
-  function hearts(){
-    setInterval(()=>{
-      const h=document.createElement("div");
-      h.className="heart"; h.innerHTML="💜";
-      h.style.left=Math.random()*100+"vw";
-      h.style.animationDuration=(Math.random()*3+4)+"s";
-      document.body.appendChild(h);
-      setTimeout(()=>h.remove(),6000);
-    },500);
+      <button onclick="save()">Save this moment 📸</button>
+      <a href="https://m.me/mark.ian.villflores.2025" target="_blank">
+        <button style="background:#1877f2;color:white;">Message me 💬</button>
+      </a>
+    `;
+    hearts(); confetti();
   }
+};
 
-  function sparkles(){
-    for(let i=0;i<30;i++){
-      const s=document.createElement("div");
-      s.className="sparkle";
-      s.style.left=Math.random()*100+"vw";
-      s.style.top=Math.random()*100+"vh";
-      document.body.appendChild(s);
-    }
+function hearts(){
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💜";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },500);
+}
+
+function confetti(){
+  for(let i=0;i<100;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    c.style.animationDuration=(Math.random()*2+2)+"s";
+    document.body.appendChild(c);
   }
+}
 
-  function confetti(){
-    for(let i=0;i<120;i++){
-      const c=document.createElement("div");
-      c.className="confetti";
-      c.style.left=Math.random()*100+"vw";
-      c.style.background=`hsl(${Math.random()*360},100%,50%)`;
-      c.style.animationDuration=(Math.random()*2+2)+"s";
-      document.body.appendChild(c);
-    }
-  }
+no.onmouseover=no.onclick=()=>{
+  no.style.left=Math.random()*80+"vw";
+  no.style.top=Math.random()*80+"vh";
+  ns=Math.max(0.3,ns-0.05);
+  no.style.transform=`scale(${ns})`;
+};
 
-  function saveShot(){
-    html2canvas(document.body).then(c=>{
-      const a=document.createElement("a");
-      a.href=c.toDataURL(); a.download="she-said-yes.png"; a.click();
-    });
-  }
-
-  noBtn.onmouseover=noBtn.onclick=()=>{
-    noBtn.style.left=Math.random()*80+"vw";
-    noBtn.style.top=Math.random()*80+"vh";
-    noScale=Math.max(0.3,noScale-0.05);
-    noBtn.style.transform=`scale(${noScale})`;
-  };
+function save(){
+  html2canvas(document.body).then(c=>{
+    const a=document.createElement("a");
+    a.href=c.toDataURL();
+    a.download="she-said-yes.png";
+    a.click();
+  });
+}
 </script>
 
 </body>
