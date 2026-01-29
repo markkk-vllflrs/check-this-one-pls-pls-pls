@@ -57,11 +57,11 @@ button:hover { transform: scale(1.05); }
   position:absolute;
 }
 
-/* 🌸 FLOWER SYSTEM — FIXED */
+/* 🌸 FLOWER */
 .flower-area {
   position: relative;
   height: 260px;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .flower-wrapper {
@@ -74,40 +74,27 @@ button:hover { transform: scale(1.05); }
 }
 
 @keyframes sway {
-  0%   { transform: translateX(-50%) rotate(0deg); }
-  25%  { transform: translateX(-50%) rotate(-5deg); }
-  50%  { transform: translateX(-50%) rotate(0deg); }
-  75%  { transform: translateX(-50%) rotate(5deg); }
+  0% { transform: translateX(-50%) rotate(0deg); }
+  25% { transform: translateX(-50%) rotate(-5deg); }
+  50% { transform: translateX(-50%) rotate(0deg); }
+  75% { transform: translateX(-50%) rotate(5deg); }
   100% { transform: translateX(-50%) rotate(0deg); }
 }
 
-/* stem */
 .stem {
   width: 6px;
-  height: 0;
+  height: 140px;
   background: #4CAF50;
   margin: 0 auto;
-  animation: growStem 2s ease forwards;
 }
 
-@keyframes growStem {
-  to { height: 140px; }
-}
-
-/* flower head */
 .flower {
   position: relative;
   width: 100px;
   height: 100px;
   margin: 0 auto;
-  transform: scale(0);
-  animation:
-    bloom 2s ease forwards,
-    breathe 4s ease-in-out infinite;
-  animation-delay: 2s, 4.5s;
+  animation: breathe 4s ease-in-out infinite;
 }
-
-@keyframes bloom { to { transform: scale(1); } }
 
 @keyframes breathe {
   0% { transform: scale(1); }
@@ -115,12 +102,11 @@ button:hover { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
-/* petals */
 .petal {
   position: absolute;
   width: 36px;
   height: 56px;
-  background: #ff9acb;
+  background: #9b5de5;
   border-radius: 50% 50% 45% 45%;
   top: 22px;
   left: 32px;
@@ -134,7 +120,6 @@ button:hover { transform: scale(1.05); }
 .p5 { transform: rotate(240deg) translateY(-38px); }
 .p6 { transform: rotate(300deg) translateY(-38px); }
 
-/* center */
 .center {
   position: absolute;
   width: 26px;
@@ -143,20 +128,9 @@ button:hover { transform: scale(1.05); }
   border-radius: 50%;
   top: 37px;
   left: 37px;
-  z-index: 2;
 }
 
-/* violet transition */
-.violet .petal {
-  animation: violetize 3s ease forwards;
-  animation-delay: 4s;
-}
-
-@keyframes violetize {
-  to { background:#9b5de5; }
-}
-
-/* place buttons */
+/* places */
 .place-btn {
   background: white;
   border: 2px solid #ddd;
@@ -166,17 +140,6 @@ button:hover { transform: scale(1.05); }
   background: #9b5de5;
   color: white;
   border-color: #9b5de5;
-}
-
-/* floating hearts */
-.heart {
-  position: absolute;
-  bottom: -20px;
-  animation: floatUp 6s linear infinite;
-}
-
-@keyframes floatUp {
-  to { transform: translateY(-110vh); opacity: 0; }
 }
 </style>
 </head>
@@ -192,87 +155,74 @@ button:hover { transform: scale(1.05); }
 </div>
 
 <script>
-const steps=[
+const steps = [
  {q:"Pwede igkidnap ta ikaw this Feb 14? 👀",s:"Pramis tuod ini, kalbuhi ngan kutliga ak if trippings la :)))",img:"https://i.imgur.com/6b7RjQy.jpeg"},
  {q:"Weh? Weh? Fr fr? 😳",s:"Sana diri mo ak igditch kay papabuthon kot iyo balay. Charot.",img:"https://i.imgur.com/0M9Jf9p.jpeg"},
- {q:"Sure sure?? 🤨",s:".",img:"https://i.imgur.com/z9F5Z6B.jpeg"},
- {q:"Final answer na ito ha 😌",s:"Waray na karagbawi.",img:"https://i.imgur.com/JJp9YyS.jpeg"}
+ {q:"Sure sure?? 🤨",s:".",img:"https://i.imgur.com/z9F5Z6B.jpeg"}
 ];
 
-let i=0, ys=1, ns=1;
-let chosenPlace="";
+let step = 0;
+let yesScale = 1;
+let noScale = 1;
 
-const yes=document.getElementById("yes");
-const no=document.getElementById("no");
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
 
-yes.onclick=()=>{
-  i++; ys+=0.25;
-  yes.style.transform=`scale(${ys})`;
-
-  if(i<steps.length){
-    question.textContent=steps[i].q;
-    subtext.textContent=steps[i].s;
-    meme.src=steps[i].img;
+yes.onclick = () => {
+  if (step < steps.length) {
+    question.textContent = steps[step].q;
+    subtext.textContent = steps[step].s;
+    meme.src = steps[step].img;
+    step++;
+    yesScale += 0.25;
+    yes.style.transform = `scale(${yesScale})`;
   } else {
-    document.body.classList.add("cute-bg");
-    card.innerHTML=`
-      <h1>She said YES 😭💜</h1>
-      <p>Ano tim prefer? hekhek 😌</p>
-
-      <h3>What if 👀</h3>
-      <button class="place-btn" onclick="pick(this,'Coffee date ☕')">Coffee date ☕</button>
-      <button class="place-btn" onclick="pick(this,'Park stroll 🌳')">Park stroll 🌳</button>
-      <button class="place-btn" onclick="pick(this,'Food trip 🍜')">Food trip 🍜</button>
-
-      <div class="flower-area">
-        <div class="flower-wrapper">
-          <div class="stem"></div>
-          <div class="flower violet">
-            <div class="petal p1"></div>
-            <div class="petal p2"></div>
-            <div class="petal p3"></div>
-            <div class="petal p4"></div>
-            <div class="petal p5"></div>
-            <div class="petal p6"></div>
-            <div class="center"></div>
-          </div>
-        </div>
-      </div>
-
-      <div id="msg"></div>
-    `;
-    hearts();
+    showFinal();
   }
 };
 
-function pick(btn,place){
-  document.querySelectorAll('.place-btn').forEach(b=>b.classList.remove('selected'));
+function showFinal() {
+  document.body.classList.add("cute-bg");
+  card.innerHTML = `
+    <h1>She said YES 😭💜</h1>
+    <p>Okay… where do u wanna go? 😌</p>
+
+    <button class="place-btn" onclick="pick(this,'Coffee date ☕')">Coffee date ☕</button>
+    <button class="place-btn" onclick="pick(this,'Park stroll 🌳')">Park stroll 🌳</button>
+    <button class="place-btn" onclick="pick(this,'Food trip 🍜')">Food trip 🍜</button>
+
+    <div id="choice"></div>
+
+    <div class="flower-area">
+      <div class="flower-wrapper">
+        <div class="stem"></div>
+        <div class="flower">
+          <div class="petal p1"></div><div class="petal p2"></div>
+          <div class="petal p3"></div><div class="petal p4"></div>
+          <div class="petal p5"></div><div class="petal p6"></div>
+          <div class="center"></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function pick(btn, place) {
+  document.querySelectorAll('.place-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
-  chosenPlace=place;
-  document.getElementById("msg").innerHTML=`
-    <p>You chose: <strong>${place}</strong> 😌</p>
+  document.getElementById("choice").innerHTML = `
+    <p>You chose <strong>${place}</strong> 😌</p>
     <a href="https://m.me/mark.ian.villflores.2025" target="_blank">
       <button style="background:#1877f2;color:white;">Message me 💬</button>
     </a>
   `;
 }
 
-function hearts(){
-  setInterval(()=>{
-    const h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="💜";
-    h.style.left=Math.random()*100+"vw";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),6000);
-  },600);
-}
-
-no.onmouseover=no.onclick=()=>{
-  no.style.left=Math.random()*80+"vw";
-  no.style.top=Math.random()*80+"vh";
-  ns=Math.max(0.3,ns-0.05);
-  no.style.transform=`scale(${ns})`;
+no.onmouseover = no.onclick = () => {
+  no.style.left = Math.random()*80 + "vw";
+  no.style.top = Math.random()*80 + "vh";
+  noScale = Math.max(0.3, noScale - 0.05);
+  no.style.transform = `scale(${noScale})`;
 };
 </script>
 
