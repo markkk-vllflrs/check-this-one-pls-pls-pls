@@ -63,71 +63,74 @@ button:hover { transform: scale(1.05); }
 .bee {
   position: absolute;
   font-size: 28px;
-  animation: fly 8s linear infinite;
+  animation: fly 10s linear infinite;
   pointer-events: none;
   z-index: 1;
 }
 
 @keyframes fly {
-  0% { transform: translateX(-10vw); }
-  50% { transform: translateX(110vw); }
-  100% { transform: translateX(-10vw); }
+  0% { transform: translateX(-15vw); }
+  100% { transform: translateX(115vw); }
 }
 
-/* 🌸 SAFE FLOWER */
+/* 🌸 FLOWER (UPRIGHT + SAFE) */
 .flower-box {
-  margin-top: 20px;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* stem */
 .stem {
   width: 6px;
   height: 0;
   background: #4CAF50;
-  margin: 0 auto;
-  animation: growStem 2.5s ease forwards;
+  animation: growStem 2.2s ease forwards;
 }
 
 @keyframes growStem {
-  from { height: 0; }
   to { height: 120px; }
 }
 
+/* flower head */
 .flower {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto;
   position: relative;
+  width: 90px;
+  height: 90px;
+  margin-top: -10px;
   opacity: 0;
   animation: bloom 1.2s ease forwards;
-  animation-delay: 2.5s;
+  animation-delay: 2.2s;
 }
 
 @keyframes bloom {
-  from { transform: scale(0); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  to { opacity: 1; }
 }
 
+/* petals */
 .petal {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   background: #9b5de5;
   border-radius: 50%;
 }
 
-.p1 { top: 0; left: 25px; }
-.p2 { top: 25px; left: 0; }
-.p3 { top: 25px; right: 0; }
-.p4 { bottom: 0; left: 25px; }
+.p1 { top: 0; left: 27px; }
+.p2 { top: 27px; left: 0; }
+.p3 { top: 27px; right: 0; }
+.p4 { bottom: 0; left: 27px; }
 
+/* center */
 .center {
   position: absolute;
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   background: gold;
   border-radius: 50%;
-  top: 29px;
-  left: 29px;
+  top: 32px;
+  left: 32px;
 }
 
 /* confetti */
@@ -140,9 +143,7 @@ button:hover { transform: scale(1.05); }
 }
 
 @keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-  }
+  to { transform: translateY(110vh) rotate(360deg); }
 }
 
 /* places */
@@ -161,7 +162,7 @@ button:hover { transform: scale(1.05); }
 
 <body>
 
-<!-- 🐝 BEES (ALL PAGES) -->
+<!-- 🐝 BEES -->
 <div class="bee" style="top:15%; animation-delay:0s;">🐝</div>
 <div class="bee" style="top:35%; animation-delay:2s;">🐝</div>
 <div class="bee" style="top:55%; animation-delay:4s;">🐝</div>
