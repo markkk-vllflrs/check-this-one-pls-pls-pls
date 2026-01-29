@@ -5,6 +5,9 @@
 <title>Hi, R.D. 😁</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- html2canvas -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
 <style>
 body {
   margin: 0;
@@ -48,10 +51,113 @@ button {
   transition: all 0.25s ease;
 }
 
-#yes { background:#ff5f8f; color:white; }
-#no { background:#eee; position:absolute; }
+button:hover { transform: scale(1.05); }
 
-/* 🌸 PLACE BUTTONS */
+#yes { background:#ff5f8f; color:white; }
+#no {
+  background:#eee;
+  color:#333;
+  position:absolute;
+}
+
+/* floating stickers */
+.sticker {
+  position: absolute;
+  font-size: 22px;
+  animation: float 6s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+/* flower */
+.flower-area {
+  margin-top: 25px;
+}
+
+.flower {
+  width: 120px;
+  height: 200px;
+  margin: auto;
+  animation: sway 4s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.stem {
+  width: 6px;
+  height: 120px;
+  background: #4CAF50;
+  margin: auto;
+  border-radius: 4px;
+}
+
+.bloom {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  animation: breathe 3.5s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+.petal {
+  position: absolute;
+  width: 40px;
+  height: 60px;
+  background: #9b5de5;
+  border-radius: 50%;
+  top: 20px;
+  left: 30px;
+  transform-origin: center bottom;
+}
+
+.p1 { transform: rotate(0deg) translateY(-35px); }
+.p2 { transform: rotate(60deg) translateY(-35px); }
+.p3 { transform: rotate(120deg) translateY(-35px); }
+.p4 { transform: rotate(180deg) translateY(-35px); }
+.p5 { transform: rotate(240deg) translateY(-35px); }
+.p6 { transform: rotate(300deg) translateY(-35px); }
+
+.center {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: gold;
+  border-radius: 50%;
+  top: 36px;
+  left: 36px;
+}
+
+/* confetti */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* places */
 .place-btn {
   background: white;
   border: 2px solid #ddd;
@@ -62,66 +168,16 @@ button {
   color: white;
   border-color: #9b5de5;
 }
-
-/* 🐝 BEES */
-.bee {
-  position: absolute;
-  font-size: 26px;
-  animation: fly 12s linear infinite;
-}
-
-@keyframes fly {
-  0% { transform: translate(-10vw, 10vh); }
-  50% { transform: translate(60vw, 40vh); }
-  100% { transform: translate(-10vw, 10vh); }
-}
-
-/* 🎉 CONFETTI */
-.confetti {
-  position: absolute;
-  width: 8px;
-  height: 14px;
-  background: pink;
-  animation: fall 3s linear infinite;
-}
-
-@keyframes fall {
-  0% { transform: translateY(-10vh) rotate(0); opacity:1; }
-  100% { transform: translateY(110vh) rotate(360deg); opacity:0; }
-}
-
-/* 💜 FLOATING HEARTS */
-.heart {
-  position: absolute;
-  font-size: 20px;
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); opacity:0.7; }
-  50% { transform: translateY(-40px); opacity:1; }
-  100% { transform: translateY(0); opacity:0.7; }
-}
-
-/* ✨ SPARKLES */
-.sparkle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: sparkle 2s ease-in-out infinite;
-}
-
-@keyframes sparkle {
-  0%,100% { transform: scale(0.6); opacity:0.4; }
-  50% { transform: scale(1); opacity:1; }
-}
 </style>
 </head>
 
 <body>
+
+<!-- stickers -->
+<div class="sticker" style="top:10%;left:10%;">☁️</div>
+<div class="sticker" style="top:20%;right:15%;">✨</div>
+<div class="sticker" style="bottom:15%;left:12%;">💜</div>
+<div class="sticker" style="bottom:20%;right:10%;">🌸</div>
 
 <div class="card" id="card">
   <h1 id="question">Hi, Ruswel 😁</h1>
@@ -131,9 +187,9 @@ button {
   <button id="no">No 🙄</button>
 </div>
 
-<!-- 🐝 BEES -->
-<div class="bee" style="top:10%;left:10%">🐝</div>
-<div class="bee" style="top:30%;left:80%">🐝</div>
+<audio id="clickSound">
+  <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3">
+</audio>
 
 <script>
 const steps = [
@@ -144,8 +200,14 @@ const steps = [
 
 let step = 0;
 let yesScale = 1;
+let noScale = 1;
+
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const clickSound = document.getElementById("clickSound");
 
 yes.onclick = () => {
+  clickSound.play();
   if (step < steps.length) {
     question.textContent = steps[step].q;
     subtext.textContent = steps[step].s;
@@ -153,81 +215,86 @@ yes.onclick = () => {
     step++;
     yesScale += 0.25;
     yes.style.transform = `scale(${yesScale})`;
-  } else showFinal();
+  } else {
+    showFinal();
+  }
 };
 
 function showFinal() {
   document.body.classList.add("cute-bg");
-
-  // 🎉 CONFETTI GENERATOR
-  for(let i=0;i<40;i++){
-    let c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.background=`hsl(${Math.random()*360},100%,80%)`;
-    c.style.animationDelay=Math.random()*2+"s";
-    document.body.appendChild(c);
-  }
-
-  // 💜 HEARTS & ✨ SPARKLES
-  for(let i=0;i<15;i++){
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerText="💜";
-    h.style.left=Math.random()*100+"vw";
-    h.style.top=Math.random()*100+"vh";
-    document.body.appendChild(h);
-
-    let s=document.createElement("div");
-    s.className="sparkle";
-    s.style.left=Math.random()*100+"vw";
-    s.style.top=Math.random()*100+"vh";
-    document.body.appendChild(s);
-  }
-
   card.innerHTML = `
     <h1>She said YES 😭💜</h1>
-    <p>Okay… which do u prefer? 😌</p>
+    <p><em>No matter what you choose… I was really hoping you’d say yes.</em></p>
 
-    <button class="place-btn" onclick="pick(this,'Coffee shop ☕')">Coffee shop ☕</button>
+    <p>Which place do you wanna go? 😌</p>
+
+    <button class="place-btn" onclick="pick(this,'Coffee Shop ☕')">Coffee Shop ☕</button>
     <button class="place-btn" onclick="pick(this,'Restaurant 🍽️')">Restaurant 🍽️</button>
-    <button class="place-btn" onclick="pick(this,'Food trip 🍜')">Food trip 🍜</button>
+    <button class="place-btn" onclick="pick(this,'Food Trip 🍜')">Food Trip 🍜</button>
     <button class="place-btn" onclick="pick(this,'Rides 🎡')">Rides 🎡</button>
-    <button class="place-btn" onclick="pick(this,'Up to you 🤷‍♀️')">Up to you 🤷‍♀️</button>
+    <button class="place-btn" onclick="pick(this,'Up to you 😌')">Up to you 😌</button>
 
     <div id="choice"></div>
 
-    <!-- 🌸 ONE SAFE FLOWER -->
-    <svg width="140" height="220" viewBox="0 0 160 240">
-      <rect x="76" y="90" width="8" height="120" fill="#4CAF50"/>
-      <g transform="translate(80 70)">
-        <ellipse rx="22" ry="36" fill="#9b5de5"/>
-        <ellipse rx="22" ry="36" fill="#9b5de5" transform="rotate(60)"/>
-        <ellipse rx="22" ry="36" fill="#9b5de5" transform="rotate(120)"/>
-        <ellipse rx="22" ry="36" fill="#9b5de5" transform="rotate(180)"/>
-        <ellipse rx="22" ry="36" fill="#9b5de5" transform="rotate(240)"/>
-        <ellipse rx="22" ry="36" fill="#9b5de5" transform="rotate(300)"/>
-        <circle r="14" fill="gold"/>
-      </g>
-    </svg>
+    <div class="flower-area">
+      <div class="flower">
+        <div class="bloom">
+          <div class="petal p1"></div><div class="petal p2"></div>
+          <div class="petal p3"></div><div class="petal p4"></div>
+          <div class="petal p5"></div><div class="petal p6"></div>
+          <div class="center"></div>
+        </div>
+        <div class="stem"></div>
+      </div>
+    </div>
+
+    <p style="margin-top:15px;"><strong>Thanks for saying yes. That means a lot to me.</strong></p>
   `;
+
+  startConfetti();
 }
 
 function pick(btn, place) {
+  clickSound.play();
   document.querySelectorAll('.place-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
+
   document.getElementById("choice").innerHTML = `
     <p>You chose <strong>${place}</strong> 😌</p>
     <a href="https://m.me/mark.ian.villflores.2025" target="_blank">
       <button style="background:#1877f2;color:white;">Message me 💬</button>
     </a>
+    <br><br>
+    <button onclick="saveShot()">Save this moment 🥹</button>
   `;
 }
 
-no.onmouseover = () => {
+function saveShot() {
+  html2canvas(document.body).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "moment.png";
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+}
+
+no.onmouseover = no.onclick = () => {
   no.style.left = Math.random()*80 + "vw";
   no.style.top = Math.random()*80 + "vh";
+  noScale = Math.max(0.3, noScale - 0.05);
+  no.style.transform = `scale(${noScale})`;
 };
+
+function startConfetti() {
+  for (let i = 0; i < 120; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * window.innerWidth + "px";
+    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
+    c.style.animationDuration = (Math.random()*2+2)+"s";
+    document.body.appendChild(c);
+  }
+}
 </script>
 
 </body>
