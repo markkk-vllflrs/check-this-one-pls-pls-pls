@@ -59,7 +59,7 @@ button:hover { transform: scale(1.05); }
   position:absolute;
 }
 
-/* 🐝 BEES — ALWAYS FLYING */
+/* 🐝 BEES */
 .bee {
   position: absolute;
   font-size: 28px;
@@ -69,24 +69,65 @@ button:hover { transform: scale(1.05); }
 }
 
 @keyframes fly {
-  0% { transform: translateX(-10vw) translateY(0); }
-  50% { transform: translateX(110vw) translateY(-40px); }
-  100% { transform: translateX(-10vw) translateY(0); }
+  0% { transform: translateX(-10vw); }
+  50% { transform: translateX(110vw); }
+  100% { transform: translateX(-10vw); }
 }
 
-/* stickers */
-.sticker {
+/* 🌸 SAFE FLOWER */
+.flower-box {
+  margin-top: 20px;
+}
+
+.stem {
+  width: 6px;
+  height: 0;
+  background: #4CAF50;
+  margin: 0 auto;
+  animation: growStem 2.5s ease forwards;
+}
+
+@keyframes growStem {
+  from { height: 0; }
+  to { height: 120px; }
+}
+
+.flower {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  position: relative;
+  opacity: 0;
+  animation: bloom 1.2s ease forwards;
+  animation-delay: 2.5s;
+}
+
+@keyframes bloom {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.petal {
   position: absolute;
-  font-size: 22px;
-  animation: float 6s ease-in-out infinite;
-  opacity: 0.6;
-  z-index: 1;
+  width: 30px;
+  height: 30px;
+  background: #9b5de5;
+  border-radius: 50%;
 }
 
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0); }
+.p1 { top: 0; left: 25px; }
+.p2 { top: 25px; left: 0; }
+.p3 { top: 25px; right: 0; }
+.p4 { bottom: 0; left: 25px; }
+
+.center {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: gold;
+  border-radius: 50%;
+  top: 29px;
+  left: 29px;
 }
 
 /* confetti */
@@ -120,17 +161,11 @@ button:hover { transform: scale(1.05); }
 
 <body>
 
-<!-- 🐝 BEES (GLOBAL) -->
+<!-- 🐝 BEES (ALL PAGES) -->
 <div class="bee" style="top:15%; animation-delay:0s;">🐝</div>
-<div class="bee" style="top:40%; animation-delay:2s;">🐝</div>
-<div class="bee" style="top:65%; animation-delay:4s;">🐝</div>
-<div class="bee" style="top:30%; animation-delay:6s;">🐝</div>
-
-<!-- stickers -->
-<div class="sticker" style="top:8%;left:10%;">☁️</div>
-<div class="sticker" style="top:18%;right:12%;">✨</div>
-<div class="sticker" style="bottom:12%;left:15%;">💜</div>
-<div class="sticker" style="bottom:18%;right:10%;">🌼</div>
+<div class="bee" style="top:35%; animation-delay:2s;">🐝</div>
+<div class="bee" style="top:55%; animation-delay:4s;">🐝</div>
+<div class="bee" style="top:75%; animation-delay:6s;">🐝</div>
 
 <div class="card" id="card">
   <h1 id="question">Hi, Ruswel 😁</h1>
@@ -176,7 +211,7 @@ yes.onclick = () => {
 function showFinal() {
   document.body.classList.add("cute-bg");
   card.innerHTML = `
-    <h1>WOWOWOWOWOWOOW HAHAHAHAHAHA 😭💜</h1>
+    <h1>WOWOWOWOWOWOOW HUSDHSUHAUSHUASH 😭💜</h1>
 
     <p>So… where do you wanna go? 😌</p>
 
@@ -188,7 +223,18 @@ function showFinal() {
 
     <div id="choice"></div>
 
-    <p style="margin-top:18px;">
+    <div class="flower-box">
+      <div class="stem"></div>
+      <div class="flower">
+        <div class="petal p1"></div>
+        <div class="petal p2"></div>
+        <div class="petal p3"></div>
+        <div class="petal p4"></div>
+        <div class="center"></div>
+      </div>
+    </div>
+
+    <p style="margin-top:15px;">
       <strong>It malate hiya mabayad expenses HAUHSUAHSAUHSUAHSUAHSUA</strong>
     </p>
   `;
