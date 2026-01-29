@@ -5,7 +5,6 @@
 <title>Hi, R.D. 😁</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- html2canvas -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <style>
@@ -22,7 +21,7 @@ body {
 }
 
 body.cute-bg {
-  background: linear-gradient(135deg, #ffe6f0, #f3e8ff, #e6f0ff);
+  background: linear-gradient(135deg, #fff0f6, #f3e8ff, #e6f7ff);
 }
 
 .card {
@@ -60,7 +59,21 @@ button:hover { transform: scale(1.05); }
   position:absolute;
 }
 
-/* floating stickers */
+/* 🐝 BEES */
+.bee {
+  position: absolute;
+  font-size: 28px;
+  animation: fly 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes fly {
+  0% { transform: translateX(-10vw) translateY(0); }
+  50% { transform: translateX(110vw) translateY(-40px); }
+  100% { transform: translateX(-10vw) translateY(0); }
+}
+
+/* stickers */
 .sticker {
   position: absolute;
   font-size: 22px;
@@ -72,74 +85,6 @@ button:hover { transform: scale(1.05); }
   0% { transform: translateY(0); }
   50% { transform: translateY(-15px); }
   100% { transform: translateY(0); }
-}
-
-/* flower */
-.flower-area {
-  margin-top: 25px;
-}
-
-.flower {
-  width: 120px;
-  height: 200px;
-  margin: auto;
-  animation: sway 4s ease-in-out infinite;
-}
-
-@keyframes sway {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(2deg); }
-  100% { transform: rotate(0deg); }
-}
-
-.stem {
-  width: 6px;
-  height: 120px;
-  background: #4CAF50;
-  margin: auto;
-  border-radius: 4px;
-}
-
-.bloom {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  margin: auto;
-  animation: breathe 3.5s ease-in-out infinite;
-}
-
-@keyframes breathe {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.06); }
-  100% { transform: scale(1); }
-}
-
-.petal {
-  position: absolute;
-  width: 40px;
-  height: 60px;
-  background: #9b5de5;
-  border-radius: 50%;
-  top: 20px;
-  left: 30px;
-  transform-origin: center bottom;
-}
-
-.p1 { transform: rotate(0deg) translateY(-35px); }
-.p2 { transform: rotate(60deg) translateY(-35px); }
-.p3 { transform: rotate(120deg) translateY(-35px); }
-.p4 { transform: rotate(180deg) translateY(-35px); }
-.p5 { transform: rotate(240deg) translateY(-35px); }
-.p6 { transform: rotate(300deg) translateY(-35px); }
-
-.center {
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  background: gold;
-  border-radius: 50%;
-  top: 36px;
-  left: 36px;
 }
 
 /* confetti */
@@ -173,11 +118,16 @@ button:hover { transform: scale(1.05); }
 
 <body>
 
-<!-- stickers -->
-<div class="sticker" style="top:10%;left:10%;">☁️</div>
-<div class="sticker" style="top:20%;right:15%;">✨</div>
-<div class="sticker" style="bottom:15%;left:12%;">💜</div>
-<div class="sticker" style="bottom:20%;right:10%;">🌸</div>
+<!-- cute stickers -->
+<div class="sticker" style="top:8%;left:10%;">☁️</div>
+<div class="sticker" style="top:18%;right:12%;">✨</div>
+<div class="sticker" style="bottom:12%;left:15%;">💜</div>
+<div class="sticker" style="bottom:18%;right:10%;">🌼</div>
+
+<!-- bees -->
+<div class="bee" style="top:20%; animation-delay:0s;">🐝</div>
+<div class="bee" style="top:45%; animation-delay:2s;">🐝</div>
+<div class="bee" style="top:65%; animation-delay:4s;">🐝</div>
 
 <div class="card" id="card">
   <h1 id="question">Hi, Ruswel 😁</h1>
@@ -224,9 +174,9 @@ function showFinal() {
   document.body.classList.add("cute-bg");
   card.innerHTML = `
     <h1>She said YES 😭💜</h1>
-    <p><em>No matter what you choose… I was really hoping you’d say yes.</em></p>
+    <p><em>Lowkey happy, highkey kilig.</em></p>
 
-    <p>Which place do you wanna go? 😌</p>
+    <p>So… where do you wanna go? 😌</p>
 
     <button class="place-btn" onclick="pick(this,'Coffee Shop ☕')">Coffee Shop ☕</button>
     <button class="place-btn" onclick="pick(this,'Restaurant 🍽️')">Restaurant 🍽️</button>
@@ -236,19 +186,7 @@ function showFinal() {
 
     <div id="choice"></div>
 
-    <div class="flower-area">
-      <div class="flower">
-        <div class="bloom">
-          <div class="petal p1"></div><div class="petal p2"></div>
-          <div class="petal p3"></div><div class="petal p4"></div>
-          <div class="petal p5"></div><div class="petal p6"></div>
-          <div class="center"></div>
-        </div>
-        <div class="stem"></div>
-      </div>
-    </div>
-
-    <p style="margin-top:15px;"><strong>Thanks for saying yes. That means a lot to me.</strong></p>
+    <p style="margin-top:18px;"><strong>It malate mabayad hit expenses, ems SAHSAHHSAHSAHS </strong></p>
   `;
 
   startConfetti();
