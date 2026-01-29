@@ -2,222 +2,267 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>She said YES 💜</title>
+<title>Hi, R.D. 😁</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(180deg, #fff0ff, #f5e9ff);
+  height: 100vh;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
   overflow: hidden;
+  transition: background 1.5s ease;
+}
+
+body.cute-bg {
+  background: linear-gradient(135deg, #ffe6f0, #f3e8ff, #e6f0ff);
+}
+
+.card {
   text-align: center;
+  max-width: 420px;
+  padding: 30px;
+  z-index: 2;
 }
 
-h1 {
-  margin-top: 40px;
-  font-size: 2.4rem;
-}
+h1 { font-size: 26px; }
+p { color: #555; }
 
-.subtitle {
-  opacity: 0.7;
-}
-
-.buttons {
-  margin-top: 25px;
+img {
+  width: 220px;
+  border-radius: 12px;
+  margin: 15px 0;
 }
 
 button {
-  padding: 14px 22px;
-  border-radius: 25px;
+  padding: 12px 26px;
+  font-size: 16px;
+  border-radius: 999px;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
   margin: 8px;
-  transition: 0.3s;
+  transition: all 0.25s ease;
 }
 
-.choice {
-  background: white;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+button:hover { transform: scale(1.05); }
 
-.choice:hover {
-  transform: scale(1.05);
-}
-
-.selected {
-  background: #9b5de5;
-  color: white;
+#yes { background:#ff5f8f; color:white; }
+#no {
+  background:#eee;
+  color:#333;
+  position:absolute;
 }
 
 /* 🌸 FLOWER AREA */
+.flower-area {
+  position: relative;
+  height: 300px;
+  margin-top: 20px;
+}
+
 .flower-wrapper {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.flower-sway {
   transform-origin: bottom center;
   animation: sway 5s ease-in-out infinite;
 }
 
+@keyframes sway {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  25% { transform: translateX(-50%) rotate(-4deg); }
+  50% { transform: translateX(-50%) rotate(0deg); }
+  75% { transform: translateX(-50%) rotate(4deg); }
+  100% { transform: translateX(-50%) rotate(0deg); }
+}
+
+/* 🌱 Stem growth */
 .stem {
   width: 6px;
   height: 0;
-  background: #4caf50;
-  margin: auto;
-  animation: growStem 2.5s ease-out forwards;
+  background: #4CAF50;
+  margin: 0 auto;
+  animation: growStem 2s ease forwards;
 }
 
+@keyframes growStem {
+  to { height: 140px; }
+}
+
+/* 🌼 Flower head */
 .flower {
   position: relative;
   width: 120px;
   height: 120px;
-  margin: auto;
+  margin: 0 auto;
   transform: scale(0);
-  animation: bloom 1s ease-out forwards;
-  animation-delay: 2.6s;
-}
-
-.petal {
-  position: absolute;
-  width: 40px;
-  height: 60px;
-  background: #a66cff;
-  border-radius: 50%;
-  opacity: 0;
-  transform: scale(0);
-  animation: petalBloom 0.6s ease-out forwards;
-}
-
-.p1 { top: 0; left: 40px; animation-delay: 2.8s; }
-.p2 { top: 30px; left: 75px; transform: rotate(60deg); animation-delay: 3.0s; }
-.p3 { top: 65px; left: 60px; transform: rotate(120deg); animation-delay: 3.2s; }
-.p4 { top: 65px; left: 20px; transform: rotate(180deg); animation-delay: 3.4s; }
-.p5 { top: 30px; left: 0; transform: rotate(240deg); animation-delay: 3.6s; }
-.p6 { top: -5px; left: 20px; transform: rotate(300deg); animation-delay: 3.8s; }
-
-.center {
-  position: absolute;
-  top: 42px;
-  left: 42px;
-  width: 35px;
-  height: 35px;
-  background: #ffd60a;
-  border-radius: 50%;
-  z-index: 5;
-}
-
-/* 🌬 breathing */
-.flower {
-  animation: bloom 1s ease-out forwards, breathe 4s ease-in-out infinite;
-}
-
-/* ❤️ floating hearts */
-.heart {
-  position: absolute;
-  font-size: 16px;
-  animation: floatUp 6s linear infinite;
-  opacity: 0.7;
-}
-
-/* 🎬 animations */
-@keyframes growStem {
-  from { height: 0; }
-  to { height: 220px; }
+  animation: bloom 1s ease forwards;
+  animation-delay: 2s;
 }
 
 @keyframes bloom {
-  from { transform: scale(0); }
   to { transform: scale(1); }
 }
 
-@keyframes petalBloom {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes sway {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(3deg); }
-  100% { transform: rotate(0deg); }
+.flower {
+  animation: breathe 4s ease-in-out infinite;
 }
 
 @keyframes breathe {
-  0%,100% { transform: scale(1); }
+  0% { transform: scale(1); }
   50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 0.8; }
-  to { transform: translateY(-800px); opacity: 0; }
+/* 🌸 Petals */
+.petal {
+  position: absolute;
+  width: 38px;
+  height: 58px;
+  background: #9b5de5;
+  border-radius: 50% 50% 40% 40%;
+  top: 30px;
+  left: 41px;
+  opacity: 0;
+  transform-origin: center 50px;
+  animation: petalBloom 0.6s ease forwards;
 }
 
-/* 📱 message button */
-.message-btn {
-  margin-top: 15px;
-  background: #1e88e5;
+@keyframes petalBloom {
+  to { opacity: 1; }
+}
+
+.p1 { transform: rotate(0deg) translateY(-40px); animation-delay: 2.2s; }
+.p2 { transform: rotate(60deg) translateY(-40px); animation-delay: 2.4s; }
+.p3 { transform: rotate(120deg) translateY(-40px); animation-delay: 2.6s; }
+.p4 { transform: rotate(180deg) translateY(-40px); animation-delay: 2.8s; }
+.p5 { transform: rotate(240deg) translateY(-40px); animation-delay: 3s; }
+.p6 { transform: rotate(300deg) translateY(-40px); animation-delay: 3.2s; }
+
+/* 🌼 Center */
+.center {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background: gold;
+  border-radius: 50%;
+  top: 47px;
+  left: 47px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+  animation-delay: 3.4s;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* places */
+.place-btn {
+  background: white;
+  border: 2px solid #ddd;
+}
+
+.place-btn.selected {
+  background: #9b5de5;
   color: white;
+  border-color: #9b5de5;
 }
 </style>
 </head>
 
 <body>
 
-<h1>She said YES 😭💜</h1>
-<p class="subtitle">Ano trip natin? hehehe 😌</p>
-
-<div class="buttons">
-  <button class="choice" onclick="choose('Coffee date ☕')">Coffee date ☕</button>
-  <button class="choice" onclick="choose('Park stroll 🌳')">Park stroll 🌳</button>
-  <button class="choice" onclick="choose('Food trip 🍜')">Food trip 🍜</button>
-</div>
-
-<p id="result"></p>
-
-<button class="message-btn" onclick="message()">Message me 💬</button>
-
-<!-- 🌸 FLOWER -->
-<div class="flower-wrapper">
-  <div class="flower-sway">
-    <div class="stem"></div>
-    <div class="flower">
-      <div class="petal p1"></div>
-      <div class="petal p2"></div>
-      <div class="petal p3"></div>
-      <div class="petal p4"></div>
-      <div class="petal p5"></div>
-      <div class="petal p6"></div>
-      <div class="center"></div>
-    </div>
-  </div>
+<div class="card" id="card">
+  <h1 id="question">Hi, Ruswel 😁</h1>
+  <p id="subtext">Chill lang ha… may pakiana ko gad hehe</p>
+  <img id="meme" src="https://i.imgur.com/6b7RjQy.jpeg">
+  <button id="yes">Yes 😌</button>
+  <button id="no">No 🙄</button>
 </div>
 
 <script>
-function choose(place) {
-  document.getElementById("result").innerText =
-    "You chose: " + place + " 🥹💜";
+const steps = [
+ {q:"Pwede igkidnap ta ikaw this Feb 14? 👀",s:"Pramis tuod ini, kalbuhi ngan kutliga ak if trippings la :)))",img:"https://i.imgur.com/6b7RjQy.jpeg"},
+ {q:"Weh? Weh? Fr fr? 😳",s:"Sana diri mo ak igditch kay papabuthon kot iyo balay. Charot.",img:"https://i.imgur.com/0M9Jf9p.jpeg"},
+ {q:"Sure sure?? 🤨",s:".",img:"https://i.imgur.com/z9F5Z6B.jpeg"}
+];
+
+let step = 0;
+let yesScale = 1;
+let noScale = 1;
+
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const card = document.getElementById("card");
+const question = document.getElementById("question");
+const subtext = document.getElementById("subtext");
+const meme = document.getElementById("meme");
+
+yes.onclick = () => {
+  if (step < steps.length) {
+    question.textContent = steps[step].q;
+    subtext.textContent = steps[step].s;
+    meme.src = steps[step].img;
+    step++;
+    yesScale += 0.25;
+    yes.style.transform = `scale(${yesScale})`;
+  } else {
+    showFinal();
+  }
+};
+
+function showFinal() {
+  document.body.classList.add("cute-bg");
+  card.innerHTML = `
+    <h1>She said YES 😭💜</h1>
+    <p>Okay… which do u prefer? 😌</p>
+
+    <button class="place-btn" onclick="pick(this,'Coffee date ☕')">Coffee date ☕</button>
+    <button class="place-btn" onclick="pick(this,'Park stroll 🌳')">Park stroll 🌳</button>
+    <button class="place-btn" onclick="pick(this,'Food trip 🍜')">Food trip 🍜</button>
+
+    <div id="choice"></div>
+
+    <div class="flower-area">
+      <div class="flower-wrapper">
+        <div class="stem"></div>
+        <div class="flower">
+          <div class="petal p1"></div>
+          <div class="petal p2"></div>
+          <div class="petal p3"></div>
+          <div class="petal p4"></div>
+          <div class="petal p5"></div>
+          <div class="petal p6"></div>
+          <div class="center"></div>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
-function message() {
-  window.open("https://m.me/mark.ian.villflores.2025", "_blank");
+function pick(btn, place) {
+  document.querySelectorAll('.place-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById("choice").innerHTML = `
+    <p>You chose <strong>${place}</strong> 😌</p>
+    <a href="https://m.me/mark.ian.villflores.2025" target="_blank">
+      <button style="background:#1877f2;color:white;">Message me 💬</button>
+    </a>
+  `;
 }
 
-/* ❤️ hearts generator */
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerText = "💜";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.bottom = "0px";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
-}, 800);
+no.onmouseover = no.onclick = () => {
+  no.style.left = Math.random()*80 + "vw";
+  no.style.top = Math.random()*80 + "vh";
+  noScale = Math.max(0.3, noScale - 0.05);
+  no.style.transform = `scale(${noScale})`;
+};
 </script>
 
 </body>
