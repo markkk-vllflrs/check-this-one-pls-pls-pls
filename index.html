@@ -5,8 +5,6 @@
 <title>Hi, R.D. 😁</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
 <style>
 body {
   margin: 0;
@@ -41,14 +39,16 @@ img {
 }
 
 button {
-  padding: 12px 30px;
-  font-size: 18px;
+  padding: 12px 26px;
+  font-size: 16px;
   border-radius: 999px;
   border: none;
   cursor: pointer;
-  margin: 10px;
-  transition: all 0.3s ease;
+  margin: 8px;
+  transition: all 0.25s ease;
 }
+
+button:hover { transform: scale(1.05); }
 
 #yes { background:#ff5f8f; color:white; }
 #no {
@@ -57,10 +57,10 @@ button {
   position:absolute;
 }
 
-/* 🌸 FLOWER SYSTEM (FIXED & INTACT) */
+/* 🌸 FLOWER SYSTEM — FIXED */
 .flower-area {
   position: relative;
-  height: 280px;
+  height: 260px;
   margin-top: 20px;
 }
 
@@ -68,17 +68,16 @@ button {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform-origin: bottom center;
   transform: translateX(-50%);
+  transform-origin: bottom center;
   animation: sway 5s ease-in-out infinite;
 }
 
-/* sway motion */
 @keyframes sway {
   0%   { transform: translateX(-50%) rotate(0deg); }
-  25%  { transform: translateX(-50%) rotate(-6deg); }
+  25%  { transform: translateX(-50%) rotate(-5deg); }
   50%  { transform: translateX(-50%) rotate(0deg); }
-  75%  { transform: translateX(-50%) rotate(6deg); }
+  75%  { transform: translateX(-50%) rotate(5deg); }
   100% { transform: translateX(-50%) rotate(0deg); }
 }
 
@@ -92,7 +91,7 @@ button {
 }
 
 @keyframes growStem {
-  to { height: 150px; }
+  to { height: 140px; }
 }
 
 /* flower head */
@@ -100,7 +99,7 @@ button {
   position: relative;
   width: 100px;
   height: 100px;
-  margin: -10px auto 0;
+  margin: 0 auto;
   transform: scale(0);
   animation:
     bloom 2s ease forwards,
@@ -108,17 +107,15 @@ button {
   animation-delay: 2s, 4.5s;
 }
 
-@keyframes bloom {
-  to { transform: scale(1); }
-}
+@keyframes bloom { to { transform: scale(1); } }
 
 @keyframes breathe {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.05); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
-/* petals (CLEAN CIRCLE) */
+/* petals */
 .petal {
   position: absolute;
   width: 36px;
@@ -159,6 +156,18 @@ button {
   to { background:#9b5de5; }
 }
 
+/* place buttons */
+.place-btn {
+  background: white;
+  border: 2px solid #ddd;
+}
+
+.place-btn.selected {
+  background: #9b5de5;
+  color: white;
+  border-color: #9b5de5;
+}
+
 /* floating hearts */
 .heart {
   position: absolute;
@@ -168,19 +177,6 @@ button {
 
 @keyframes floatUp {
   to { transform: translateY(-110vh); opacity: 0; }
-}
-
-/* confetti */
-.confetti {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  top: -10px;
-  animation: fall linear infinite;
-}
-
-@keyframes fall {
-  to { transform: translateY(110vh) rotate(360deg); }
 }
 </style>
 </head>
@@ -195,10 +191,6 @@ button {
   <button id="no">No 🙄</button>
 </div>
 
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b1fdbf38.mp3">
-</audio>
-
 <script>
 const steps=[
  {q:"Pwede igkidnap ta ikaw this Feb 14? 👀",s:"Pramis tuod ini, kalbuhi ngan kutliga ak if trippings la :)))",img:"https://i.imgur.com/6b7RjQy.jpeg"},
@@ -207,19 +199,16 @@ const steps=[
  {q:"Final answer na ito ha 😌",s:"Waray na karagbawi.",img:"https://i.imgur.com/JJp9YyS.jpeg"}
 ];
 
-let i=0,ys=1,ns=1;
+let i=0, ys=1, ns=1;
+let chosenPlace="";
+
 const yes=document.getElementById("yes");
 const no=document.getElementById("no");
-const bgMusic=document.getElementById("bgMusic");
-
-document.addEventListener("click",()=>{
-  bgMusic.volume=0.4;
-  bgMusic.play().catch(()=>{});
-},{once:true});
 
 yes.onclick=()=>{
   i++; ys+=0.25;
   yes.style.transform=`scale(${ys})`;
+
   if(i<steps.length){
     question.textContent=steps[i].q;
     subtext.textContent=steps[i].s;
@@ -228,7 +217,12 @@ yes.onclick=()=>{
     document.body.classList.add("cute-bg");
     card.innerHTML=`
       <h1>She said YES 😭💜</h1>
-      <p>Soft launch lang…</p>
+      <p>Ano tim prefer? hekhek 😌</p>
+
+      <h3>What if 👀</h3>
+      <button class="place-btn" onclick="pick(this,'Coffee date ☕')">Coffee date ☕</button>
+      <button class="place-btn" onclick="pick(this,'Park stroll 🌳')">Park stroll 🌳</button>
+      <button class="place-btn" onclick="pick(this,'Food trip 🍜')">Food trip 🍜</button>
 
       <div class="flower-area">
         <div class="flower-wrapper">
@@ -245,14 +239,23 @@ yes.onclick=()=>{
         </div>
       </div>
 
-      <button onclick="save()">Save this moment 📸</button>
-      <a href="https://m.me/mark.ian.villflores.2025" target="_blank">
-        <button style="background:#1877f2;color:white;">Message me 💬</button>
-      </a>
+      <div id="msg"></div>
     `;
-    hearts(); confetti();
+    hearts();
   }
 };
+
+function pick(btn,place){
+  document.querySelectorAll('.place-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  chosenPlace=place;
+  document.getElementById("msg").innerHTML=`
+    <p>You chose: <strong>${place}</strong> 😌</p>
+    <a href="https://m.me/mark.ian.villflores.2025" target="_blank">
+      <button style="background:#1877f2;color:white;">Message me 💬</button>
+    </a>
+  `;
+}
 
 function hearts(){
   setInterval(()=>{
@@ -262,18 +265,7 @@ function hearts(){
     h.style.left=Math.random()*100+"vw";
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),6000);
-  },500);
-}
-
-function confetti(){
-  for(let i=0;i<100;i++){
-    const c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
-    c.style.animationDuration=(Math.random()*2+2)+"s";
-    document.body.appendChild(c);
-  }
+  },600);
 }
 
 no.onmouseover=no.onclick=()=>{
@@ -282,15 +274,6 @@ no.onmouseover=no.onclick=()=>{
   ns=Math.max(0.3,ns-0.05);
   no.style.transform=`scale(${ns})`;
 };
-
-function save(){
-  html2canvas(document.body).then(c=>{
-    const a=document.createElement("a");
-    a.href=c.toDataURL();
-    a.download="she-said-yes.png";
-    a.click();
-  });
-}
 </script>
 
 </body>
