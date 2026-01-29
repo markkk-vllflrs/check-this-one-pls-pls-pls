@@ -57,10 +57,10 @@ button {
   position:absolute;
 }
 
-/* 🌸 FLOWER SYSTEM */
+/* 🌸 FLOWER SYSTEM (FIXED & INTACT) */
 .flower-area {
   position: relative;
-  height: 260px;
+  height: 280px;
   margin-top: 20px;
 }
 
@@ -69,15 +69,16 @@ button {
   bottom: 0;
   left: 50%;
   transform-origin: bottom center;
+  transform: translateX(-50%);
   animation: sway 5s ease-in-out infinite;
 }
 
-/* sway */
+/* sway motion */
 @keyframes sway {
-  0% { transform: translateX(-50%) rotate(0deg); }
-  25% { transform: translateX(-50%) rotate(-7deg); }
-  50% { transform: translateX(-50%) rotate(0deg); }
-  75% { transform: translateX(-50%) rotate(7deg); }
+  0%   { transform: translateX(-50%) rotate(0deg); }
+  25%  { transform: translateX(-50%) rotate(-6deg); }
+  50%  { transform: translateX(-50%) rotate(0deg); }
+  75%  { transform: translateX(-50%) rotate(6deg); }
   100% { transform: translateX(-50%) rotate(0deg); }
 }
 
@@ -86,21 +87,20 @@ button {
   width: 6px;
   height: 0;
   background: #4CAF50;
-  margin: auto;
+  margin: 0 auto;
   animation: growStem 2s ease forwards;
 }
 
 @keyframes growStem {
-  to { height: 140px; }
+  to { height: 150px; }
 }
 
-/* flower */
+/* flower head */
 .flower {
   position: relative;
-  width: 90px;
-  height: 90px;
-  margin: auto;
-  margin-top: -10px;
+  width: 100px;
+  height: 100px;
+  margin: -10px auto 0;
   transform: scale(0);
   animation:
     bloom 2s ease forwards,
@@ -113,39 +113,40 @@ button {
 }
 
 @keyframes breathe {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.06); }
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
-/* petals (VISIBLE I PROMISE 😭) */
+/* petals (CLEAN CIRCLE) */
 .petal {
   position: absolute;
   width: 36px;
-  height: 60px;
+  height: 56px;
   background: #ff9acb;
-  border-radius: 50% 50% 40% 40%;
-  top: 15px;
-  left: 27px;
-  transform-origin: bottom center;
+  border-radius: 50% 50% 45% 45%;
+  top: 22px;
+  left: 32px;
+  transform-origin: center 45px;
 }
 
-.p1 { transform: rotate(0deg) translateY(-22px); }
-.p2 { transform: rotate(60deg) translateY(-22px); }
-.p3 { transform: rotate(120deg) translateY(-22px); }
-.p4 { transform: rotate(180deg) translateY(-22px); }
-.p5 { transform: rotate(240deg) translateY(-22px); }
-.p6 { transform: rotate(300deg) translateY(-22px); }
+.p1 { transform: rotate(0deg) translateY(-38px); }
+.p2 { transform: rotate(60deg) translateY(-38px); }
+.p3 { transform: rotate(120deg) translateY(-38px); }
+.p4 { transform: rotate(180deg) translateY(-38px); }
+.p5 { transform: rotate(240deg) translateY(-38px); }
+.p6 { transform: rotate(300deg) translateY(-38px); }
 
 /* center */
 .center {
   position: absolute;
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   background: gold;
   border-radius: 50%;
-  top: 34px;
-  left: 34px;
+  top: 37px;
+  left: 37px;
+  z-index: 2;
 }
 
 /* violet transition */
@@ -158,7 +159,7 @@ button {
   to { background:#9b5de5; }
 }
 
-/* hearts */
+/* floating hearts */
 .heart {
   position: absolute;
   bottom: -20px;
@@ -209,6 +210,7 @@ const steps=[
 let i=0,ys=1,ns=1;
 const yes=document.getElementById("yes");
 const no=document.getElementById("no");
+const bgMusic=document.getElementById("bgMusic");
 
 document.addEventListener("click",()=>{
   bgMusic.volume=0.4;
