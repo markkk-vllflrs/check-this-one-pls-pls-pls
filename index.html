@@ -51,34 +51,6 @@ button {
 #yes { background:#ff5f8f; color:white; }
 #no { background:#eee; position:absolute; }
 
-/* 🌸 FLOWER AREA */
-.flower-area {
-  margin-top: 25px;
-  display: flex;
-  justify-content: center;
-}
-
-/* 🐝 BEES */
-.bee {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  animation: fly 10s linear infinite;
-}
-
-.bee::before {
-  content: "🐝";
-  font-size: 26px;
-}
-
-@keyframes fly {
-  0%   { transform: translate(-10vw, 10vh); }
-  25%  { transform: translate(30vw, -10vh); }
-  50%  { transform: translate(60vw, 20vh); }
-  75%  { transform: translate(30vw, 40vh); }
-  100% { transform: translate(-10vw, 10vh); }
-}
-
 /* 🌸 PLACE BUTTONS */
 .place-btn {
   background: white;
@@ -89,6 +61,62 @@ button {
   background: #9b5de5;
   color: white;
   border-color: #9b5de5;
+}
+
+/* 🐝 BEES */
+.bee {
+  position: absolute;
+  font-size: 26px;
+  animation: fly 12s linear infinite;
+}
+
+@keyframes fly {
+  0% { transform: translate(-10vw, 10vh); }
+  50% { transform: translate(60vw, 40vh); }
+  100% { transform: translate(-10vw, 10vh); }
+}
+
+/* 🎉 CONFETTI */
+.confetti {
+  position: absolute;
+  width: 8px;
+  height: 14px;
+  background: pink;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0); opacity:1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity:0; }
+}
+
+/* 💜 FLOATING HEARTS */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); opacity:0.7; }
+  50% { transform: translateY(-40px); opacity:1; }
+  100% { transform: translateY(0); opacity:0.7; }
+}
+
+/* ✨ SPARKLES */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%,100% { transform: scale(0.6); opacity:0.4; }
+  50% { transform: scale(1); opacity:1; }
 }
 </style>
 </head>
@@ -104,9 +132,8 @@ button {
 </div>
 
 <!-- 🐝 BEES -->
-<div class="bee" style="animation-delay:0s;"></div>
-<div class="bee" style="animation-delay:3s;"></div>
-<div class="bee" style="animation-delay:6s;"></div>
+<div class="bee" style="top:10%;left:10%">🐝</div>
+<div class="bee" style="top:30%;left:80%">🐝</div>
 
 <script>
 const steps = [
@@ -131,6 +158,33 @@ yes.onclick = () => {
 
 function showFinal() {
   document.body.classList.add("cute-bg");
+
+  // 🎉 CONFETTI GENERATOR
+  for(let i=0;i<40;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=`hsl(${Math.random()*360},100%,80%)`;
+    c.style.animationDelay=Math.random()*2+"s";
+    document.body.appendChild(c);
+  }
+
+  // 💜 HEARTS & ✨ SPARKLES
+  for(let i=0;i<15;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerText="💜";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top=Math.random()*100+"vh";
+    document.body.appendChild(h);
+
+    let s=document.createElement("div");
+    s.className="sparkle";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    document.body.appendChild(s);
+  }
+
   card.innerHTML = `
     <h1>She said YES 😭💜</h1>
     <p>Okay… which do u prefer? 😌</p>
@@ -143,19 +197,19 @@ function showFinal() {
 
     <div id="choice"></div>
 
-    <div class="flower-area">
-      <!-- 🌸 SAFE SVG FLOWER -->
-      <svg width="160" height="240" viewBox="0 0 160 240">
-        <rect x="76" y="80" width="8" height="120" fill="#4CAF50"/>
-        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5"/>
-        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5" transform="rotate(60 80 60)"/>
-        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5" transform="rotate(120 80 60)"/>
-        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5" transform="rotate(180 80 60)"/>
-        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5" transform="rotate(240 80 60)"/>
-        <ellipse cx="80" cy="60" rx="22" ry="36" fill="#9b5de5" transform="rotate(300 80 60)"/>
-        <circle cx="80" cy="60" r="14" fill="gold"/>
-      </svg>
-    </div>
+    <!-- 🌸 ONE SAFE FLOWER -->
+    <svg width="140" height="220" viewBox="0 0 160 240">
+      <rect x="76" y="90" width="8" height="120" fill="#4CAF50"/>
+      <g transform="translate(80 70)">
+        <ellipse rx="22" ry="36" fill="#9b5de5"/>
+        <ellipse rx="22" ry="36" fill="#9b5de5" transform="rotate(60)"/>
+        <ellipse rx="22" ry="36" fill="#9b5de5" transform="rotate(120)"/>
+        <ellipse rx="22" ry="36" fill="#9b5de5" transform="rotate(180)"/>
+        <ellipse rx="22" ry="36" fill="#9b5de5" transform="rotate(240)"/>
+        <ellipse rx="22" ry="36" fill="#9b5de5" transform="rotate(300)"/>
+        <circle r="14" fill="gold"/>
+      </g>
+    </svg>
   `;
 }
 
