@@ -69,11 +69,11 @@ button:hover { transform: scale(1.05); }
 }
 
 @keyframes fly {
-  0% { transform: translateX(-15vw); }
-  100% { transform: translateX(115vw); }
+  from { transform: translateX(-15vw); }
+  to { transform: translateX(115vw); }
 }
 
-/* 🌸 FLOWER (UPRIGHT + SAFE) */
+/* 🌸 FLOWER (UPRIGHT & SAFE) */
 .flower-box {
   margin-top: 25px;
   display: flex;
@@ -81,7 +81,6 @@ button:hover { transform: scale(1.05); }
   align-items: center;
 }
 
-/* stem */
 .stem {
   width: 6px;
   height: 0;
@@ -93,7 +92,6 @@ button:hover { transform: scale(1.05); }
   to { height: 120px; }
 }
 
-/* flower head */
 .flower {
   position: relative;
   width: 90px;
@@ -108,7 +106,6 @@ button:hover { transform: scale(1.05); }
   to { opacity: 1; }
 }
 
-/* petals */
 .petal {
   position: absolute;
   width: 36px;
@@ -122,7 +119,6 @@ button:hover { transform: scale(1.05); }
 .p3 { top: 27px; right: 0; }
 .p4 { bottom: 0; left: 27px; }
 
-/* center */
 .center {
   position: absolute;
   width: 26px;
@@ -133,7 +129,7 @@ button:hover { transform: scale(1.05); }
   left: 32px;
 }
 
-/* confetti */
+/* 🎊 CONFETTI */
 .confetti {
   position: absolute;
   width: 10px;
@@ -171,7 +167,7 @@ button:hover { transform: scale(1.05); }
 <div class="card" id="card">
   <h1 id="question">Hi, Ruswel 😁</h1>
   <p id="subtext">Chill lang ha… may pakiana ko gad hehe</p>
-  <img id="meme" src="https://i.imgur.com/6b7RjQy.jpeg">
+  <img id="meme" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
   <button id="yes">Yes 😌</button>
   <button id="no">No 🙄</button>
 </div>
@@ -182,9 +178,21 @@ button:hover { transform: scale(1.05); }
 
 <script>
 const steps = [
- {q:"Pwede igkidnap ta ikaw this Feb 14? 👀",s:"Pramis tuod ini, kalbuhi ngan kutliga ak if trippings la :)))",img:"https://i.imgur.com/6b7RjQy.jpeg"},
- {q:"Weh? Weh? Fr fr? 😳",s:"Sana diri mo ak igditch kay papabuthon kot iyo balay. Charot.",img:"https://i.imgur.com/0M9Jf9p.jpeg"},
- {q:"Sure sure?? 🤨",s:".",img:"https://i.imgur.com/z9F5Z6B.jpeg"}
+ {
+  q:"Pwede igkidnap ta ikaw this Feb 14? 👀",
+  s:"Pramis tuod ini, kalbuhi ngan kutliga ak if trippings la :)))",
+  img:"https://media.giphy.com/media/l0MYC0LajbaPoEADu/giphy.gif"
+ },
+ {
+  q:"Weh? Weh? Fr fr? 😳",
+  s:"Sana diri mo ak igditch kay papabuthon kot iyo balay. Charot.",
+  img:"https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
+ },
+ {
+  q:"Sure sure?? 🤨",
+  s:".",
+  img:"https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif"
+ }
 ];
 
 let step = 0;
@@ -213,6 +221,8 @@ function showFinal() {
   document.body.classList.add("cute-bg");
   card.innerHTML = `
     <h1>WOWOWOWOWOWOOW HUSDHSUHAUSHUASH 😭💜</h1>
+
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
 
     <p>So… where do you wanna go? 😌</p>
 
