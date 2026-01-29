@@ -5,7 +5,6 @@
 <title>Hi, R.D. 😁 HUAHAUUSHSUAHUHA</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- 📸 Screenshot library -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 <style>
@@ -29,8 +28,8 @@
     text-align: center;
     max-width: 420px;
     padding: 30px;
-    z-index: 2;
     position: relative;
+    z-index: 2;
   }
 
   h1 { font-size: 26px; }
@@ -52,24 +51,21 @@
     transition: all 0.3s ease;
   }
 
-  #yes {
-    background: #ff5f8f;
-    color: white;
-  }
-
+  #yes { background:#ff5f8f; color:white; }
   #no {
-    background: #eee;
-    color: #333;
-    position: absolute;
+    background:#eee;
+    color:#333;
+    position:absolute;
   }
 
-  /* 🌱 FLOWER */
+  /* 🌱 FLOWER AREA */
   .flower-box {
-    margin-top: 30px;
-    height: 220px;
     position: relative;
+    height: 260px;
+    margin-top: 20px;
   }
 
+  /* STEM */
   .stem {
     position: absolute;
     bottom: 0;
@@ -78,57 +74,93 @@
     height: 0;
     background: #4CAF50;
     transform-origin: bottom center;
-    transform: translateX(-50%);
-    animation: growStem 2s ease forwards, shyBend 2s ease forwards;
+    animation: growStem 2s ease forwards, sway 4s ease-in-out infinite;
     animation-delay: 0s, 2s;
   }
 
   @keyframes growStem {
-    to { height: 130px; }
+    to { height: 140px; }
   }
 
-  @keyframes shyBend {
-    to { transform: translateX(-50%) rotate(-10deg); }
+  @keyframes sway {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-50%) rotate(-6deg); }
+    50% { transform: translateX(-50%) rotate(0deg); }
+    75% { transform: translateX(-50%) rotate(6deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
   }
 
+  /* 🌸 FLOWER */
   .flower {
     position: absolute;
-    bottom: 130px;
+    bottom: 140px;
     left: 50%;
+    width: 80px;
+    height: 80px;
     transform: translateX(-50%) scale(0);
-    font-size: 42px;
-    animation: bloom 2s ease forwards;
-    animation-delay: 3.5s;
-    filter: hue-rotate(0deg);
+    animation: bloom 2s ease forwards, breathe 4s ease-in-out infinite;
+    animation-delay: 3s, 5.5s;
   }
 
   @keyframes bloom {
-    to { transform: translateX(-50%) scale(3); }
+    to { transform: translateX(-50%) scale(1); }
   }
 
-  .violet {
-    animation: turnViolet 3s ease forwards;
-    animation-delay: 5.5s;
+  /* 🌬️ BREATHING EFFECT */
+  @keyframes breathe {
+    0%   { transform: translateX(-50%) scale(1); }
+    50%  { transform: translateX(-50%) scale(1.05); }
+    100% { transform: translateX(-50%) scale(1); }
   }
 
-  @keyframes turnViolet {
-    to { filter: hue-rotate(240deg); }
+  .petal {
+    position: absolute;
+    width: 30px;
+    height: 50px;
+    background: pink;
+    border-radius: 50%;
+    top: 15px;
+    left: 25px;
+    transform-origin: bottom center;
+  }
+
+  .petal:nth-child(1) { transform: rotate(0deg) translateY(-20px); }
+  .petal:nth-child(2) { transform: rotate(60deg) translateY(-20px); }
+  .petal:nth-child(3) { transform: rotate(120deg) translateY(-20px); }
+  .petal:nth-child(4) { transform: rotate(180deg) translateY(-20px); }
+  .petal:nth-child(5) { transform: rotate(240deg) translateY(-20px); }
+  .petal:nth-child(6) { transform: rotate(300deg) translateY(-20px); }
+
+  .center {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: gold;
+    border-radius: 50%;
+    top: 29px;
+    left: 29px;
+  }
+
+  /* 💜 VIOLET TRANSITION */
+  .violet .petal {
+    animation: violetize 3s ease forwards;
+    animation-delay: 4.5s;
+  }
+
+  @keyframes violetize {
+    to { background: #9b5de5; }
   }
 
   /* 💕 FLOATING HEARTS */
   .heart {
     position: absolute;
     bottom: -20px;
-    font-size: 18px;
     animation: floatUp 6s linear infinite;
     opacity: 0.7;
   }
 
   @keyframes floatUp {
-    to {
-      transform: translateY(-110vh);
-      opacity: 0;
-    }
+    to { transform: translateY(-110vh); opacity: 0; }
   }
 
   /* ✨ SPARKLES */
@@ -139,11 +171,11 @@
     background: white;
     border-radius: 50%;
     opacity: 0.8;
-    animation: sparkle 2s ease-in-out infinite;
+    animation: sparkle 2s infinite;
   }
 
   @keyframes sparkle {
-    50% { opacity: 0.2; transform: scale(1.5); }
+    50% { opacity: 0.3; transform: scale(1.5); }
   }
 
   /* 🎊 CONFETTI */
@@ -167,7 +199,6 @@
   <h1 id="question">Hi, Ruswel 😁</h1>
   <p id="subtext">Chill lang ha… may pakiana ko gad hehe</p>
   <img id="meme" src="https://i.imgur.com/6b7RjQy.jpeg">
-
   <button id="yes">Yes 😌</button>
   <button id="no">No 🙄</button>
 </div>
@@ -181,47 +212,44 @@
 </audio>
 
 <script>
-  const steps = [
-    { q:"Pwede igkidnap ta ikaw this Feb 14? 👀", s:"Pramis tuod ini, kalbuhi ngan kutliga ak if trippings la :)))", img:"https://i.imgur.com/6b7RjQy.jpeg"},
-    { q:"Weh? Weh? Fr fr? 😳", s:"Sana diri mo ak igditch kay papabuthon kot iyo balay. Charot HASHAHSAHSHAHSA.", img:"https://i.imgur.com/0M9Jf9p.jpeg"},
-    { q:"Sure sure?? 🤨", s:".", img:"https://i.imgur.com/z9F5Z6B.jpeg"},
-    { q:"Ah balet?? 🤨", s:"Blink twice pag need rescue HAUHAHUAAUHHAHSUAA", img:"https://i.imgur.com/j0dJf3y.jpeg"},
-    { q:"Final answer na ito ha 😌", s:"Waray na karagbawi, will report u as bogus.", img:"https://i.imgur.com/JJp9YyS.jpeg"}
+  const steps=[
+    {q:"Pwede igkidnap ta ikaw this Feb 14? 👀",s:"Pramis tuod ini, kalbuhi ngan kutliga ak if trippings la :)))",img:"https://i.imgur.com/6b7RjQy.jpeg"},
+    {q:"Weh? Weh? Fr fr? 😳",s:"Sana diri mo ak igditch kay papabuthon kot iyo balay. Charot HASHAHSAHSHAHSA.",img:"https://i.imgur.com/0M9Jf9p.jpeg"},
+    {q:"Sure sure?? 🤨",s:".",img:"https://i.imgur.com/z9F5Z6B.jpeg"},
+    {q:"Ah balet?? 🤨",s:"Blink twice pag need rescue HAUHAHUAAUHHAHSUAA",img:"https://i.imgur.com/j0dJf3y.jpeg"},
+    {q:"Final answer na ito ha 😌",s:"Waray na karagbawi, will report u as bogus.",img:"https://i.imgur.com/JJp9YyS.jpeg"}
   ];
 
-  let index = 0, yesScale = 1, noScale = 1;
-  const yesBtn = document.getElementById("yes");
-  const noBtn = document.getElementById("no");
-  const card = document.getElementById("card");
-  const bgMusic = document.getElementById("bgMusic");
-  const confettiSound = document.getElementById("confettiSound");
+  let index=0,yesScale=1,noScale=1;
+  const yesBtn=document.getElementById("yes");
+  const noBtn=document.getElementById("no");
+  const bgMusic=document.getElementById("bgMusic");
+  const confettiSound=document.getElementById("confettiSound");
 
-  document.addEventListener("click", () => {
-    bgMusic.volume = 0.4;
-    bgMusic.play().catch(()=>{});
-  }, { once:true });
+  document.addEventListener("click",()=>{bgMusic.volume=0.4;bgMusic.play().catch(()=>{});},{once:true});
 
-  yesBtn.onclick = () => {
-    index++; yesScale += 0.25;
-    yesBtn.style.transform = `scale(${yesScale})`;
-
-    if (index < steps.length) {
-      question.textContent = steps[index].q;
-      subtext.textContent = steps[index].s;
-      meme.src = steps[index].img;
+  yesBtn.onclick=()=>{
+    index++; yesScale+=0.25;
+    yesBtn.style.transform=`scale(${yesScale})`;
+    if(index<steps.length){
+      question.textContent=steps[index].q;
+      subtext.textContent=steps[index].s;
+      meme.src=steps[index].img;
     } else {
       document.body.classList.add("cute-bg");
-      card.innerHTML = `
+      card.innerHTML=`
         <h1>AY WOWOWOWOW HUASHAUHSUAHUA 😭💖</h1>
         <p>Confirmed na baya, ready to checkout.</p>
         <p><strong>Ruswel</strong>, thank you ha 🥹</p>
 
         <div class="flower-box">
           <div class="stem"></div>
-          <div class="flower violet">🌸</div>
+          <div class="flower violet">
+            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+            <div class="center"></div>
+          </div>
         </div>
-
-        <p>This flower grew shyly & turned violet because you said yes 😌</p>
 
         <button onclick="saveShot()" style="background:#8b5cf6;color:white;">
           Save this moment 📸
@@ -231,16 +259,15 @@
           <button style="background:#1877f2;color:white;">Message me 💬</button>
         </a>
       `;
-      noBtn.style.display="none";
       confettiSound.play();
       hearts(); sparkles(); confetti();
     }
   };
 
   function hearts(){
-    setInterval(()=> {
+    setInterval(()=>{
       const h=document.createElement("div");
-      h.className="heart"; h.innerHTML="💖";
+      h.className="heart"; h.innerHTML="💜";
       h.style.left=Math.random()*100+"vw";
       h.style.animationDuration=(Math.random()*3+4)+"s";
       document.body.appendChild(h);
@@ -270,11 +297,9 @@
   }
 
   function saveShot(){
-    html2canvas(document.body).then(canvas=>{
+    html2canvas(document.body).then(c=>{
       const a=document.createElement("a");
-      a.download="she-said-yes.png";
-      a.href=canvas.toDataURL();
-      a.click();
+      a.href=c.toDataURL(); a.download="she-said-yes.png"; a.click();
     });
   }
 
